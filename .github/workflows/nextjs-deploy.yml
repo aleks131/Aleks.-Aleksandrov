@@ -10,7 +10,7 @@ on:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -39,6 +39,8 @@ jobs:
         run: npm ci
       - name: Build with Next.js
         run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: /Aleks.-Aleksandrov
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -54,6 +56,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }} 
+        uses: actions/deploy-pages@v2 

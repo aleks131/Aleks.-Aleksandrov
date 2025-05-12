@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   // This helps with the hydration mismatch issue
@@ -23,8 +25,8 @@ const nextConfig: NextConfig = {
     unoptimized: true, // Unoptimized images for static export
   },
   // GitHub Pages configuration
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
-  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  basePath: basePath,
+  assetPrefix: basePath,
   // Add export configuration for static site generation
   output: 'export',
 };
