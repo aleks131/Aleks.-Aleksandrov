@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 
+// Base path should include a leading slash but not a trailing slash
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 const nextConfig: NextConfig = {
@@ -29,6 +30,8 @@ const nextConfig: NextConfig = {
   assetPrefix: basePath,
   // Add export configuration for static site generation
   output: 'export',
+  // Ensure trailing slashes are consistent
+  trailingSlash: true,
 };
 
 export default nextConfig;
