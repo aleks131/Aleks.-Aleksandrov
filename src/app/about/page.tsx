@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,6 +22,10 @@ import {
 } from "react-icons/fa";
 import { HiOutlineChevronDown, HiSparkles } from "react-icons/hi";
 
+function isBrowser() {
+  return typeof window !== 'undefined';
+}
+
 export default function AboutPage() {
   // Refs for scroll animations
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -39,16 +43,26 @@ export default function AboutPage() {
   const rotateX = useTransform(scrollY, [0, 500], [0, 10]);
   const scale = useTransform(scrollY, [0, 500], [1, 0.9]);
   
-  // Handle mouse move for parallax effect
+  // Create a separate handler specifically for window events
+  const windowMouseMoveHandler = useCallback((e: globalThis.MouseEvent) => {
+    const xPos = (e.clientX / (isBrowser() ? window.innerWidth : 1)) - 0.5;
+    const yPos = (e.clientY / (isBrowser() ? window.innerHeight : 1)) - 0.5;
+    setMousePosition({ x: xPos, y: yPos });
+  }, []);
+
+  useEffect(() => {
+    if (isBrowser()) {
+      window.addEventListener('mousemove', windowMouseMoveHandler);
+      return () => {
+        window.removeEventListener('mousemove', windowMouseMoveHandler);
+      };
+    }
+  }, [windowMouseMoveHandler]);
+
+  // Keep the original handler for React components
   const handleMouseMove = (e: React.MouseEvent) => {
-    const { clientX, clientY } = e;
-    const windowWidth = window.innerWidth;
-    const windowHeight = window.innerHeight;
-    
-    // Calculate position relative to center of screen (-0.5 to 0.5)
-    const xPos = (clientX / windowWidth) - 0.5;
-    const yPos = (clientY / windowHeight) - 0.5;
-    
+    const xPos = (e.clientX / (isBrowser() ? window.innerWidth : 1)) - 0.5;
+    const yPos = (e.clientY / (isBrowser() ? window.innerHeight : 1)) - 0.5;
     setMousePosition({ x: xPos, y: yPos });
   };
 
@@ -79,7 +93,6 @@ export default function AboutPage() {
   return (
     <div 
       className="min-h-screen bg-gradient-to-br from-gray-950 via-black to-gray-900 text-white"
-      onMouseMove={handleMouseMove}
     >
       <Navbar />
       
