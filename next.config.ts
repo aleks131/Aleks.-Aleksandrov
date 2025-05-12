@@ -32,12 +32,9 @@ const nextConfig: NextConfig = {
   output: 'export',
   // Ensure trailing slashes are consistent
   trailingSlash: true,
-  // Disable image optimization for static export
+  // Add experimental features if needed
   experimental: {
-    // Disable image optimization for static export
-    images: {
-      allowFutureImage: true,
-    },
+    // Add any supported experimental features here
   },
 };
 
