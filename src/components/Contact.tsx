@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { 
   FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, 
-  FaGithub, FaTwitter, FaPaperPlane, FaCheckCircle 
+  FaGithub, FaTwitter, FaPaperPlane, FaCheckCircle, FaExternalLinkAlt 
 } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi";
 import { RiSendPlaneFill } from "react-icons/ri";
@@ -282,8 +282,8 @@ const Contact = () => {
                     ) : (
                       <div className="text-gray-600 dark:text-gray-400">
                         {item.link ? (
-                          <a 
-                            href={item.link} 
+                          <a
+                            href={typeof item.link === 'string' ? item.link : item.link[0]}
                             className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 flex items-center gap-1"
                           >
                             {item.content}
