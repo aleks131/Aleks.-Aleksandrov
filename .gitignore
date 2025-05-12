@@ -16,6 +16,9 @@
 # next.js
 /.next/
 /out/
+# Allow critical files in the out directory for GitHub Pages
+!/out/404.html
+!/out/.nojekyll
 
 # production
 /build

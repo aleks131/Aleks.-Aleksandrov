@@ -2,15 +2,23 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Redirecting to Portfolio</title>
-  <meta http-equiv="refresh" content="0;url=./out/index.html">
+  <title>Redirecting to Aleks Aleksandrov Portfolio</title>
   <script>
-    // Also use JavaScript redirect as a fallback
-    window.location.href = "./out/index.html";
+    // Handle GitHub Pages repository with special characters
+    const repoName = 'Aleks.-Aleksandrov';
+    
+    // Check if we're on GitHub Pages
+    if (window.location.hostname.includes('github.io')) {
+      // Redirect to the actual index.html in the out directory
+      window.location.href = `/${repoName}/out/index.html`;
+    } else {
+      // Local development - redirect to the out directory
+      window.location.href = "./out/index.html";
+    }
   </script>
 </head>
 <body>
-  <p>Redirecting to portfolio site...</p>
+  <h1>Redirecting to Portfolio...</h1>
   <p>If you are not redirected automatically, <a href="./out/index.html">click here</a>.</p>
 </body>
 </html> 
