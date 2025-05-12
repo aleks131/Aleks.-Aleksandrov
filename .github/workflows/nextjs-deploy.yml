@@ -17,7 +17,7 @@ permissions:
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   # Build job
@@ -30,7 +30,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: npm
+          cache: "npm"
       - name: Setup Pages
         uses: actions/configure-pages@v4
         with:
@@ -40,29 +40,62 @@ jobs:
         run: npm ci
       - name: Build with Next.js
         run: npm run build
-      - name: Create .nojekyll file
-        run: touch ./out/.nojekyll
-      - name: Create 404.html file for GitHub Pages routing
+        env:
+          NEXT_PUBLIC_BASE_PATH: /Aleks.-Aleksandrov
+      - name: Create important files for GitHub Pages
         run: |
-          cat > ./out/404.html << 'EOL'
-          <!DOCTYPE html>
-          <html>
-          <head>
-            <meta charset="utf-8">
-            <title>Page Not Found</title>
-            <script>
-              // Extract repository name from URL
-              const repoName = location.pathname.split('/')[1];
-              // Try to redirect to the correct path
-              window.location.replace(`/${repoName}/`);
-            </script>
-          </head>
-          <body>
-            <h1>Page Not Found</h1>
-            <p>Redirecting to homepage...</p>
-          </body>
-          </html>
-          EOL
+          # Create .nojekyll file
+          touch ./out/.nojekyll
+          
+          # Copy special files from public to out
+          if [ -f ./public/404.html ]; then
+            cp ./public/404.html ./out/404.html
+            echo "Copied 404.html from public directory"
+          else
+            # Create a basic 404.html if it doesn't exist
+            cat > ./out/404.html << 'EOL'
+            <!DOCTYPE html>
+            <html>
+            <head>
+              <meta charset="utf-8">
+              <title>Page Not Found</title>
+              <script>
+                // Redirect to the main page
+                window.location.replace("/Aleks.-Aleksandrov/");
+              </script>
+              <style>
+                body { font-family: sans-serif; text-align: center; padding: 50px; }
+              </style>
+            </head>
+            <body>
+              <h1>Page Not Found</h1>
+              <p>Redirecting to home page...</p>
+            </body>
+            </html>
+            EOL
+            echo "Created basic 404.html"
+          fi
+          
+          # Copy redirect.html if it exists
+          if [ -f ./public/redirect.html ]; then
+            cp ./public/redirect.html ./out/redirect.html
+            echo "Copied redirect.html from public directory"
+          fi
+          
+          # Copy index-redirect.html to the root directory (outside of base path)
+          if [ -f ./public/index-redirect.html ]; then
+            cp ./public/index-redirect.html ./out/index.html
+            echo "Copied index-redirect.html to out/index.html"
+          fi
+          
+          # Create a copy of index.html at the root to handle GitHub Pages default routing
+          if [ -f ./out/index.html ]; then
+            cp ./out/index.html ./out/Aleks.-Aleksandrov.html
+            echo "Created Aleks.-Aleksandrov.html as fallback"
+          fi
+          
+          echo "Files in out directory:"
+          ls -la ./out/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

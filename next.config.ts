@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 // Base path should include a leading slash but not a trailing slash
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '/Aleks.-Aleksandrov';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -32,6 +32,13 @@ const nextConfig: NextConfig = {
   output: 'export',
   // Ensure trailing slashes are consistent
   trailingSlash: true,
+  // Disable image optimization for static export
+  experimental: {
+    // Disable image optimization for static export
+    images: {
+      allowFutureImage: true,
+    },
+  },
 };
 
 export default nextConfig;

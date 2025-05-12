@@ -2,11 +2,12 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Page Not Found</title>
+  <title>Redirecting to Portfolio</title>
   <script>
-    // Redirect to the main page with the correct base path
+    // Redirect to the correct base path
     window.location.replace("/Aleks.-Aleksandrov/");
   </script>
+  <meta http-equiv="refresh" content="0;url=/Aleks.-Aleksandrov/">
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -15,7 +16,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
       height: 100vh;
       text-align: center;
       background-color: #f5f5f5;
@@ -28,42 +28,42 @@
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
     h1 {
-      font-size: 2em;
-      margin-bottom: 0.5em;
       color: #333;
+      margin-bottom: 20px;
     }
     p {
-      font-size: 1.2em;
-      margin-bottom: 1.5em;
       color: #666;
+      margin-bottom: 20px;
+    }
+    .loader {
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #0070f3;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
     a {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #0070f3;
-      color: white;
+      color: #0070f3;
       text-decoration: none;
-      border-radius: 5px;
       font-weight: 500;
-      transition: background-color 0.2s;
     }
     a:hover {
-      background-color: #0051bb;
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Page Not Found</h1>
-    <p>The page you're looking for doesn't exist or has been moved.</p>
-    <a href="/Aleks.-Aleksandrov/">Return to Homepage</a>
+    <h1>Redirecting to Portfolio</h1>
+    <div class="loader"></div>
+    <p>You are being redirected to Aleks Aleksandrov's portfolio.</p>
+    <p>If you are not redirected automatically, <a href="/Aleks.-Aleksandrov/">click here</a>.</p>
   </div>
-  <script>
-    // Fallback if the automatic redirect doesn't work
-    setTimeout(function() {
-      // Check if we're still on the 404 page after 2 seconds
-      document.querySelector('a').focus();
-    }, 2000);
-  </script>
 </body>
 </html> 
