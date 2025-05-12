@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting to GitHub Pages site</title>
+  <script>
+    // Get the repository name from the URL
+    const segments = window.location.pathname.split('/');
+    const repoName = segments[1]; // First segment after the domain
+
+    // Redirect to the correct base path
+    window.location.replace(`/${repoName}`);
+  </script>
+</head>
+<body>
+  <p>Redirecting to the portfolio site...</p>
+</body>
+</html> 
