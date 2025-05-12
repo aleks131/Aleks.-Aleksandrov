@@ -42,6 +42,27 @@ jobs:
         run: npm run build
       - name: Create .nojekyll file
         run: touch ./out/.nojekyll
+      - name: Create 404.html file for GitHub Pages routing
+        run: |
+          cat > ./out/404.html << 'EOL'
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="utf-8">
+            <title>Page Not Found</title>
+            <script>
+              // Extract repository name from URL
+              const repoName = location.pathname.split('/')[1];
+              // Try to redirect to the correct path
+              window.location.replace(`/${repoName}/`);
+            </script>
+          </head>
+          <body>
+            <h1>Page Not Found</h1>
+            <p>Redirecting to homepage...</p>
+          </body>
+          </html>
+          EOL
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
