@@ -11,6 +11,9 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// Export as static for static export
+export const dynamic = 'force-static';
+
 export async function POST(req: NextRequest) {
   try {
     // Parse the request body

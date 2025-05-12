@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
+// Export as static for static export
+export const dynamic = 'force-static';
+
 // This is a test API route to check if your email configuration is working
 export async function GET(req: NextRequest) {
   // Get the email credentials from environment variables
