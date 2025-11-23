@@ -1,15 +1,4 @@
-# Aleks Aleksandrov's Portfolio
-
-A modern, responsive portfolio website built with Next.js, showcasing my skills, projects, and professional experience.
-
-## Features
-
-- Responsive design that works on all devices
-- Framer Motion animations for engaging user experience
-- Interactive project showcases with detailed information
-- Contact form with email functionality
-- Dynamic content with smooth transitions
-- Optimized performance and accessibility
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
@@ -17,9 +6,19 @@ First, run the development server:
 
 ```bash
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
 ## Email Configuration
 
@@ -40,54 +39,6 @@ This portfolio includes a contact form that sends emails using Nodemailer. To se
 
 Without valid email credentials, the contact form will still work in development mode, but messages will only be logged to the console.
 
-## Deploy to GitHub Pages
-
-This portfolio is configured for easy deployment to GitHub Pages.
-
-### Quick Deployment (Windows)
-
-1. Simply run the included deployment batch file:
-   ```
-   deploy.bat
-   ```
-
-This will:
-- Initialize git (if not already initialized)
-- Add your files to git
-- Commit the changes
-- Push to your GitHub repository
-- Trigger the GitHub Actions workflow to deploy to GitHub Pages
-
-### Manual Deployment Steps
-
-If you prefer to deploy manually:
-
-1. Initialize the repository in your local project folder:
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/aleks131/Aleks.-Aleksandrov.git
-git push -u origin main
-```
-
-2. Go to your GitHub repository settings:
-   - Navigate to `Settings` > `Pages`
-   - Set up GitHub Pages to deploy from the GitHub Actions workflow
-
-3. The workflow will automatically build and deploy your site when you push changes to the main branch.
-
-4. Your site will be available at: `https://aleks131.github.io/Aleks.-Aleksandrov/`
-
-### Environment Variables for GitHub Pages
-
-The base path has been configured in the `.env.production` file:
-
-```
-NEXT_PUBLIC_BASE_PATH=/Aleks.-Aleksandrov
-```
-
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
@@ -95,6 +46,10 @@ To learn more about Next.js, take a look at the following resources:
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-## License
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-[MIT](https://choosealicense.com/licenses/mit/)
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

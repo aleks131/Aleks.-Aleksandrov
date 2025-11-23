@@ -4,13 +4,13 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { 
   FaExternalLinkAlt, FaChartLine, FaUsers, FaClock, 
   FaTrophy, FaCode, FaLaptopCode, FaPalette, FaLightbulb,
   FaArrowRight, FaGithub, FaEye
 } from "react-icons/fa";
-import { HiSparkles } from "react-icons/hi";
 import { MdDesignServices } from "react-icons/md";
 import SectionTitle from "./shared/SectionTitle";
 
@@ -192,15 +192,22 @@ const ProjectCard = ({ project }: { project: Project }) => {
           ))}
         </div>
 
-        {/* View Project Button with better accessibility */}
-        <button
-          onClick={() => router.push(project.path)}
-          className="mt-auto w-full py-2.5 px-4 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-lg font-medium flex items-center justify-center gap-2 hover:from-blue-700 hover:to-indigo-800 transition-all duration-300 shadow-sm hover:shadow-md"
+        {/* View Project Button with better accessibility - Optimized with Link and prefetch */}
+        <Link
+          href={project.path}
+          prefetch={true}
+          className="mt-auto w-full py-2.5 px-4 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-lg font-medium flex items-center justify-center gap-2 hover:from-blue-700 hover:to-indigo-800 transition-all duration-300 shadow-sm hover:shadow-md group"
         >
           <span className="flex items-center gap-2">
-            View Project Details <FaArrowRight size={14} />
+            View Project Details 
+            <motion.span
+              animate={{ x: [0, 5, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              <FaArrowRight size={14} />
+            </motion.span>
           </span>
-        </button>
+        </Link>
       </div>
     </motion.div>
   );
@@ -472,7 +479,6 @@ const Projects = () => {
         <SectionTitle 
           title="Featured Projects"
           subtitle="A showcase of my creative and technical projects spanning data analysis, web development, and innovative design solutions."
-          icon={<HiSparkles className="text-yellow-400" size={24} />}
         />
 
         {/* Enhanced filter buttons */}

@@ -19,18 +19,22 @@ export default function Home() {
     restDelta: 0.001 
   });
 
-  // Preload key animation assets
+  // Preload critical assets for instant loading
   useEffect(() => {
-    const preloadImages: string[] = [
-      // Add your key images here
-    ];
-
-    preloadImages.forEach(image => {
-      if (image) {
-        const img = new Image();
-        img.src = image;
-      }
-    });
+    if (typeof window !== 'undefined') {
+      // Preload critical images
+      const criticalImages = [
+        '/images/about/Aleks-portfolio.jpg',
+      ];
+      
+      criticalImages.forEach(src => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = src;
+        document.head.appendChild(link);
+      });
+    }
   }, []);
 
   return (
@@ -41,9 +45,9 @@ export default function Home() {
         style={{ scaleX }}
       />
 
-      <main className="relative min-h-screen">
+      <main className="relative min-h-screen" suppressHydrationWarning>
         {/* Decorative background elements */}
-        <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
+        <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10" suppressHydrationWarning>
           {/* Gradient orbs */}
           <div className="absolute top-0 -right-40 w-96 h-96 bg-blue-200/30 dark:bg-blue-900/20 rounded-full filter blur-3xl"></div>
           <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-purple-200/20 dark:bg-purple-900/20 rounded-full filter blur-3xl"></div>

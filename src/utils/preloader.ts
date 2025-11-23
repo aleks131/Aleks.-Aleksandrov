@@ -247,26 +247,26 @@ export const preloadProjectAssets = async (
       '/images/projects/Trash.png',
     ];
     
-    // Preload critical assets immediately with high priority
-    await preloadImages(criticalAssets, { 
+    // Preload critical assets immediately with high priority - don't wait
+    preloadImages(criticalAssets, { 
       priority: true, 
       concurrency: isLowBandwidth ? 2 : 5 
     });
     
-    // Preload essential fonts
-    const fontPromise = Promise.all([
+    // Preload essential fonts - don't wait
+    Promise.all([
       preloadFont('Geist', { weight: '400' }),
       preloadFont('Geist', { weight: '600' }),
     ]);
     
-    // Preload above-the-fold project images with medium priority
-    const firstBatchPromise = preloadImages(projectCardImages, { 
+    // Preload above-the-fold project images - don't wait
+    preloadImages(projectCardImages, { 
       priority: false,
       concurrency: isLowBandwidth ? 1 : 3 
     });
     
-    // Wait for fonts and first batch of projects
-    await Promise.all([fontPromise, firstBatchPromise]);
+    // Return immediately - don't wait for assets
+    return Promise.resolve();
     
     // On fast connections, we can preload secondary images too
     if (!isLowBandwidth) {
@@ -335,7 +335,7 @@ export const optimizeRendering = (): void => {
   }
 };
 
-// Main function to initialize a page with optimized loading
+// Main function to initialize a page with optimized loading - instant return
 export const initializeProjectPage = async (
   options: { 
     progressCallback?: (progress: PreloadProgress) => void 
@@ -349,16 +349,15 @@ export const initializeProjectPage = async (
   // Start optimizing rendering immediately
   optimizeRendering();
   
-  // Start preloading assets with progress tracking
-  await preloadProjectAssets({
+  // Start preloading assets (non-blocking)
+  preloadProjectAssets({
     progressCallback: options.progressCallback
   });
   
-  // Mark loading as complete
+  // Mark loading as complete immediately
   document.documentElement.classList.add('fully-loaded');
+  document.documentElement.classList.add('interactive');
   
-  // Add interaction readiness after a small delay to ensure smooth transitions
-  setTimeout(() => {
-    document.documentElement.classList.add('interactive');
-  }, 100);
+  // Return immediately - don't wait
+  return Promise.resolve();
 }; 

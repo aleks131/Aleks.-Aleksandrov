@@ -4,7 +4,6 @@ import React, { Suspense, lazy, useEffect } from "react";
 import ProjectPage from "@/components/ProjectPage";
 import { motion } from "framer-motion";
 import { LoadingSpinner, ChartContainer, MetricsGrid } from "@/components/shared";
-import Preloader from "@/components/shared/Preloader";
 import { registerChart, chartOptions } from "@/utils/chartUtils";
 import {
   FaIndustry,
@@ -16,6 +15,7 @@ import {
   FaChartBar,
   FaLeaf,
   FaWindows,
+  FaArrowRight,
 } from "react-icons/fa";
 import { SiDotnet } from "react-icons/si";
 import type { ProjectData } from "@/types/project";
@@ -40,16 +40,17 @@ const CarbonTrackerPage = () => {
         label: 'This Year',
         data: [65, 59, 80, 81, 56, 55, 40, 38, 35, 30, 25, 20],
         fill: false,
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.1
+        borderColor: 'rgb(59, 130, 246)', // Electric Blue
+        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+        tension: 0.3
       },
       {
         label: 'Last Year',
         data: [85, 82, 80, 78, 76, 72, 70, 68, 65, 60, 55, 50],
         fill: false,
-        borderColor: 'rgb(201, 203, 207)',
+        borderColor: 'rgb(75, 85, 99)', // Grey
         borderDash: [5, 5],
-        tension: 0.1
+        tension: 0.3
       }
     ]
   };
@@ -125,6 +126,41 @@ const CarbonTrackerPage = () => {
 
   // Custom sections for the project page
   const customSections = [
+    {
+      title: "System Architecture",
+      content: (
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4 p-8 bg-gray-50 dark:bg-white/5 rounded-xl overflow-x-auto border border-gray-200 dark:border-gray-800">
+           {/* Diagram Elements */}
+           <div className="flex flex-col items-center min-w-[120px]">
+             <div className="p-4 bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-lg text-center w-full hover:bg-blue-100 dark:hover:bg-blue-500/20 transition-colors">
+               <FaIndustry className="text-3xl text-blue-500 dark:text-blue-400 mb-2 mx-auto" />
+               <span className="text-sm font-semibold block text-gray-700 dark:text-gray-200">IoT Sensors</span>
+             </div>
+           </div>
+           <FaArrowRight className="text-gray-400 dark:text-gray-600 text-xl rotate-90 md:rotate-0 shrink-0" />
+           <div className="flex flex-col items-center min-w-[120px]">
+             <div className="p-4 bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-lg text-center w-full hover:bg-blue-100 dark:hover:bg-blue-500/20 transition-colors">
+               <FaCloud className="text-3xl text-blue-500 dark:text-blue-400 mb-2 mx-auto" />
+               <span className="text-sm font-semibold block text-gray-700 dark:text-gray-200">Azure Event Hub</span>
+             </div>
+           </div>
+           <FaArrowRight className="text-gray-400 dark:text-gray-600 text-xl rotate-90 md:rotate-0 shrink-0" />
+           <div className="flex flex-col items-center min-w-[120px]">
+             <div className="p-4 bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-lg text-center w-full hover:bg-blue-100 dark:hover:bg-blue-500/20 transition-colors">
+               <FaServer className="text-3xl text-blue-500 dark:text-blue-400 mb-2 mx-auto" />
+               <span className="text-sm font-semibold block text-gray-700 dark:text-gray-200">Databricks (Python)</span>
+             </div>
+           </div>
+           <FaArrowRight className="text-gray-400 dark:text-gray-600 text-xl rotate-90 md:rotate-0 shrink-0" />
+           <div className="flex flex-col items-center min-w-[120px]">
+             <div className="p-4 bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-lg text-center w-full hover:bg-blue-100 dark:hover:bg-blue-500/20 transition-colors">
+               <FaChartBar className="text-3xl text-blue-500 dark:text-blue-400 mb-2 mx-auto" />
+               <span className="text-sm font-semibold block text-gray-700 dark:text-gray-200">Power BI</span>
+             </div>
+           </div>
+        </div>
+      ),
+    },
     {
       title: "Technologies Used",
       content: (
@@ -229,27 +265,25 @@ const CarbonTrackerPage = () => {
   ];
   
   return (
-    <Preloader text="Loading carbon tracker experience...">
-      <ProjectPage
-        title={projectData.title}
-        overview={projectData.overview}
-        teamSize={projectData.teamSize}
-        duration={projectData.duration}
-        role={projectData.role}
-        metrics={metrics}
-        features={projectData.features}
-        technicalDetails={technicalDetails}
-        imagePath="/images/projects/carbon-tracker/hero.webp"
-        customSections={customSections}
-        heroBackgroundType="waves"
-        heroOverlayOpacity={0.2}
-        animationIntensity="medium"
-        secondaryImagePath="/images/projects/carbon.png"
-        heroTextGradient={true}
-        heroCtaText="View Tracker Details"
-        heroTechnicalText="Explore Implementation"
-      />
-    </Preloader>
+    <ProjectPage
+      title={projectData.title}
+      overview={projectData.overview}
+      teamSize={projectData.teamSize}
+      duration={projectData.duration}
+      role={projectData.role}
+      metrics={metrics}
+      features={projectData.features}
+      technicalDetails={technicalDetails}
+      imagePath="/images/projects/carbon-tracker/hero.webp"
+      customSections={customSections}
+      heroBackgroundType="waves"
+      heroOverlayOpacity={0.2}
+      animationIntensity="medium"
+      secondaryImagePath="/images/projects/carbon.png"
+      heroTextGradient={true}
+      heroCtaText="View Tracker Details"
+      heroTechnicalText="Explore Implementation"
+    />
   );
 };
 

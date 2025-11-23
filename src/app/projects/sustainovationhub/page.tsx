@@ -252,7 +252,13 @@ const SustainovationHubPage = () => {
       "Implemented full-text search using Elasticsearch",
       "Created automated testing suite with Jest and React Testing Library"
     ],
-    imagePath: "/images/projects/sustainovationhub-hero.jpg",
+    imagePath: "/images/projects/sustain.png",
+    heroBackgroundType: "grid",
+    heroOverlayOpacity: 0.15,
+    animationIntensity: "medium",
+    heroTextGradient: true,
+    heroCtaText: "View SustainovationHub",
+    heroTechnicalText: "Technical Implementation",
     customSections: [
       {
         title: "Platform Performance & Impact",

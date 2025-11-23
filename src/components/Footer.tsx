@@ -1,12 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FaHeart, FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { FaHeart, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
+  // Use static year to avoid hydration mismatch
+  const currentYear = 2025;
   
   // Links for the footer
   const links = [
@@ -19,7 +20,6 @@ const Footer = () => {
   
   // Social links
   const socials = [
-    { icon: <FaGithub size={18} />, href: "https://github.com/aleks131", label: "GitHub" },
     { icon: <FaLinkedin size={18} />, href: "https://www.linkedin.com/in/aleks-aleksandrov-42a472238/", label: "LinkedIn" },
     { icon: <FaEnvelope size={18} />, href: "mailto:aleksaleksandrov670@gmail.com", label: "Email" },
   ];
@@ -36,7 +36,7 @@ const Footer = () => {
               className="text-2xl font-bold text-gray-800 dark:text-gray-200"
             >
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-500 to-blue-600">
-                Aleks Aleksandrov
+              Aleks Aleksandrov
               </span>
             </Link>
             <div className="relative mt-4 max-w-md">
@@ -52,9 +52,9 @@ const Footer = () => {
                 }}
               />
               <p className="relative z-10 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-4 rounded-lg border border-gray-100/50 dark:border-gray-700/50 text-gray-700 dark:text-gray-300 leading-relaxed shadow-sm">
-                Global Business Engineering student specializing in project management and data analysis. 
-                Based in Aarhus, Denmark, passionate about transforming complex data into actionable insights.
-              </p>
+                Data Engineer & Data Scientist specializing in ETL pipelines, data warehousing, and cloud architecture. 
+                Based in Aarhus, Denmark, passionate about innovation and building scalable data solutions.
+            </p>
             </div>
           </div>
           

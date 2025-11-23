@@ -12,11 +12,6 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
 // Dynamically import heavy components
-const OptimizedSparkles = dynamic(
-  () => import('./optimized-exports').then(mod => mod.OptimizedSparkles),
-  { ssr: false, loading: () => <div className="h-full w-full bg-black/20" /> }
-);
-
 const AnimatedCounter = dynamic(
   () => import('./optimized-exports').then(mod => mod.AnimatedCounter),
   { ssr: true }
@@ -27,8 +22,7 @@ const GradientBackground = dynamic(
   { ssr: true }
 );
 
-// Import SparklesCore and CountUp only when needed
-import { SparklesCore } from "@/components/ui/sparkles";
+// Import CountUp only when needed
 import CountUp from 'react-countup';
 
 interface Metric {
@@ -164,7 +158,7 @@ const TechnologyCard = React.memo(({ tech, index }: { tech: Technology, index: n
       <motion.div 
         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         style={{ 
-          background: `radial-gradient(circle at ${50 + Math.random() * 20}% ${50 + Math.random() * 20}%, ${
+          background: `radial-gradient(circle at ${50 + (index % 3) * 7}% ${50 + (index % 4) * 5}%, ${
             ['rgba(59, 130, 246, 0.3)', 'rgba(139, 92, 246, 0.3)', 'rgba(236, 72, 153, 0.3)'][index % 3]
           }, transparent 70%)` 
         }}
@@ -452,30 +446,35 @@ export default function ProjectPage({
   }>({ floatingElements: [] });
   
   useEffect(() => {
+    if (typeof window !== 'undefined') {
     setIsMounted(true);
-    
-    // Generate random values on the client side only, after mount
-    setRandomValues({
-      floatingElements: [...Array(15)].map((_, i) => ({
-        size: Math.random() * 80 + 20,
-        top: `${Math.random() * 100}%`,
-        left: `${Math.random() * 100}%`,
-        opacity: Math.random() * 0.4 + 0.1,
-        scale: 0.5 + Math.random() * 0.5,
-        animationDuration: 15 + Math.random() * 30,
-        randomY1: Math.random() * 50 - 25,
-        randomY2: Math.random() * 50 - 25,
-        randomY3: Math.random() * 50 - 25,
-        randomRotate1: Math.random() * 180,
-        randomRotate2: Math.random() * 180,
-        randomRotate3: Math.random() * 180,
-        randomScale1: 0.5 + Math.random() * 0.5,
-        randomScale2: 0.7 + Math.random() * 0.3,
-        randomScale3: 0.5 + Math.random() * 0.5,
-        randomBlur: Math.random() * 2,
-        zIndex: Math.floor(Math.random() * 10),
-      })),
-    });
+      
+      // Generate deterministic values based on index to avoid hydration mismatch
+      setRandomValues({
+        floatingElements: [...Array(15)].map((_, i) => {
+          const baseValue = i * 0.618; // Golden ratio for better distribution
+          return {
+            size: 20 + (i % 5) * 15,
+            top: `${(i * 7 + 10) % 100}%`,
+            left: `${(i * 11 + 15) % 100}%`,
+            opacity: 0.1 + (i % 4) * 0.1,
+            scale: 0.5 + (i % 3) * 0.2,
+            animationDuration: 15 + (i % 5) * 3,
+            randomY1: (i % 10) - 5,
+            randomY2: ((i * 2) % 10) - 5,
+            randomY3: ((i * 3) % 10) - 5,
+            randomRotate1: (i * 25) % 180,
+            randomRotate2: (i * 35) % 180,
+            randomRotate3: (i * 45) % 180,
+            randomScale1: 0.5 + (i % 3) * 0.2,
+            randomScale2: 0.7 + (i % 2) * 0.15,
+            randomScale3: 0.5 + (i % 3) * 0.2,
+            randomBlur: (i % 3) * 0.5,
+            zIndex: i % 10,
+          };
+        }),
+      });
+    }
   }, []);
 
   // Find the original mouse parallax effect code
@@ -550,20 +549,21 @@ export default function ProjectPage({
   const [particles, setParticles] = useState<{ x: number; y: number; size: number; color: string; speed: number }[]>([]);
   
   useEffect(() => {
-    if (isMounted && heroBackgroundType === 'particles') {
-      // Create particles
+    if (isMounted && heroBackgroundType === 'particles' && typeof window !== 'undefined') {
+      // Create particles with deterministic positions to avoid hydration mismatch
       const particleCount = getParticleCount();
-      const newParticles = Array.from({ length: particleCount }, () => ({
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        size: Math.random() * 6 + 1,
-        color: [
-          'rgba(59, 130, 246, 0.6)', // blue
-          'rgba(139, 92, 246, 0.6)', // purple
-          'rgba(236, 72, 153, 0.6)', // pink
-          'rgba(16, 185, 129, 0.6)', // green
-        ][Math.floor(Math.random() * 4)],
-        speed: Math.random() * 0.5 + 0.1,
+      const colors = [
+        'rgba(59, 130, 246, 0.6)', // blue
+        'rgba(139, 92, 246, 0.6)', // purple
+        'rgba(236, 72, 153, 0.6)', // pink
+        'rgba(16, 185, 129, 0.6)', // green
+      ];
+      const newParticles = Array.from({ length: particleCount }, (_, i) => ({
+        x: (i * 7 + 5) % 100,
+        y: (i * 11 + 10) % 100,
+        size: 1 + (i % 6),
+        color: colors[i % 4],
+        speed: 0.1 + (i % 5) * 0.1,
       }));
       setParticles(newParticles);
     }
@@ -623,17 +623,17 @@ export default function ProjectPage({
   const renderBackground = () => {
     switch (heroBackgroundType) {
       case 'grid':
-        return (
-          <motion.div 
-            className="absolute inset-0 backdrop-blur-[1px]" 
-            style={{
+  return (
+            <motion.div 
+              className="absolute inset-0 backdrop-blur-[1px]" 
+              style={{
               backgroundImage: 'linear-gradient(to right, rgba(100, 100, 255, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(100, 100, 255, 0.1) 1px, transparent 1px)',
               backgroundSize: '50px 50px',
-              backgroundPosition: 'center center',
+                backgroundPosition: 'center center',
               transform: `perspective(2000px) rotateX(${mousePosition.y * 15}deg) rotateY(${mousePosition.x * 15}deg) scale3d(1.2, 1.2, 1.2)`,
-              transformStyle: 'preserve-3d',
-              transition: 'transform 0.1s ease-out',
-            }}
+                transformStyle: 'preserve-3d',
+                transition: 'transform 0.1s ease-out',
+              }}
           />
         );
       
@@ -644,13 +644,16 @@ export default function ProjectPage({
               <motion.path 
                 d={wavePath}
                 fill="currentColor"
-                animate={{
+                animate={isMounted ? {
                   d: [
                     wavePath,
-                    wavePath.replace(/L(\d+),(\d+)/g, (_, x, y) => `L${x},${Number(y) + (Math.random() * 10 - 5)}`),
+                    wavePath.replace(/L(\d+),(\d+)/g, (_, x, y) => {
+                      const offset = (parseInt(x) + parseInt(y)) % 11 - 5;
+                      return `L${x},${Number(y) + offset}`;
+                    }),
                     wavePath
                   ]
-                }}
+                } : { d: wavePath }}
                 transition={{
                   duration: 15,
                   repeat: Infinity,
@@ -663,20 +666,23 @@ export default function ProjectPage({
               <motion.path 
                 d={wavePath}
                 fill="currentColor"
-                animate={{
+                animate={isMounted ? {
                   d: [
                     wavePath,
-                    wavePath.replace(/L(\d+),(\d+)/g, (_, x, y) => `L${x},${Number(y) + (Math.random() * 10 - 5)}`),
+                    wavePath.replace(/L(\d+),(\d+)/g, (_, x, y) => {
+                      const offset = (parseInt(x) * 2 + parseInt(y)) % 11 - 5;
+                      return `L${x},${Number(y) + offset}`;
+                    }),
                     wavePath
                   ]
-                }}
-                transition={{
+                } : { d: wavePath }}
+              transition={{
                   duration: 20,
                   repeat: Infinity,
                   ease: "easeInOut",
                   delay: 2
-                }}
-              />
+              }}
+            />
             </svg>
           </div>
         );
@@ -684,19 +690,19 @@ export default function ProjectPage({
       case 'gradient':
         return (
           <div className="absolute inset-0">
-            <motion.div
+              <motion.div
               className="absolute w-[70rem] h-[70rem] rounded-full bg-gradient-to-r from-blue-400/30 to-violet-500/30 opacity-70 filter blur-[120px]"
-              style={{
+                style={{
                 top: '0%',
                 left: '0%',
                 x: 200 * mousePosition.x,
                 y: 200 * mousePosition.y,
-              }}
-              animate={{
+                }}
+                animate={{
                 scale: [1, 1.3, 1],
                 rotate: [0, 15, 0],
-              }}
-              transition={{
+                }}
+                transition={{
                 duration: 25,
                 repeat: Infinity,
                 ease: "easeInOut"
@@ -717,11 +723,11 @@ export default function ProjectPage({
               }}
               transition={{
                 duration: 30,
-                repeat: Infinity,
-                ease: "easeInOut",
+                  repeat: Infinity,
+                  ease: "easeInOut",
                 delay: 2
-              }}
-            />
+                }}
+              />
           </div>
         );
       
@@ -732,18 +738,19 @@ export default function ProjectPage({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 overflow-hidden" suppressHydrationWarning>
       <Navbar />
       
-      <main className="pt-16">
+      <main className="pt-16" suppressHydrationWarning>
         {/* Enhanced Hero Section with Interactive Elements */}
         <motion.section
           className="relative overflow-hidden min-h-[100vh] flex items-center border-b border-gray-100 dark:border-gray-800"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
           id="hero-section"
           ref={heroRef}
+          suppressHydrationWarning
         >
           {/* Dynamic background effect based on heroBackgroundType */}
           <div className="absolute inset-0 z-0">
@@ -753,48 +760,58 @@ export default function ProjectPage({
 
           {/* Interactive particles - only rendered if the heroBackgroundType is 'particles' */}
           {isMounted && isHeroVisible && heroBackgroundType === 'particles' && (
-            <div className="absolute inset-0 z-[1] pointer-events-none">
-              {particles.map((particle, index) => (
-                <motion.div
-                  key={index}
-                  className="absolute rounded-full pointer-events-none"
-                  style={{
-                    left: `${particle.x}%`,
-                    top: `${particle.y}%`,
-                    width: `${particle.size}px`,
-                    height: `${particle.size}px`,
-                    background: particle.color,
-                    x: mousePosition.x * (40 + index % 40),
-                    y: mousePosition.y * (40 + index % 40),
-                  }}
-                  animate={{
-                    x: [0, (Math.random() - 0.5) * 100, 0],
-                    y: [0, (Math.random() - 0.5) * 100, 0],
-                    scale: [1, Math.random() * 1.5 + 0.5, 1],
-                    opacity: [particle.size > 3 ? 0.8 : 0.4, particle.size > 3 ? 1 : 0.6, particle.size > 3 ? 0.8 : 0.4],
-                  }}
-                  transition={{
-                    duration: 10 + Math.random() * 20,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-              ))}
-            </div>
+            <div className="absolute inset-0 z-[1] pointer-events-none" suppressHydrationWarning>
+              {particles.map((particle, index) => {
+                const animX = particle.x * 0.1;
+                const animY = particle.y * 0.1;
+                const animScale = particle.size > 3 ? 1.2 : 1.1;
+                const animDuration = 8 + (index % 5) * 2;
+                return (
+              <motion.div
+                    key={index}
+                    className="absolute rounded-full pointer-events-none"
+                style={{
+                      left: `${particle.x}%`,
+                      top: `${particle.y}%`,
+                      width: `${particle.size}px`,
+                      height: `${particle.size}px`,
+                      background: particle.color,
+                      x: mousePosition.x * (40 + index % 40),
+                      y: mousePosition.y * (40 + index % 40),
+                }}
+                animate={{
+                      x: [0, animX, 0],
+                      y: [0, animY, 0],
+                      scale: [1, animScale, 1],
+                      opacity: [particle.size > 3 ? 0.8 : 0.4, particle.size > 3 ? 1 : 0.6, particle.size > 3 ? 0.8 : 0.4],
+                }}
+                transition={{
+                      duration: animDuration,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                    suppressHydrationWarning
+              />
+                );
+              })}
+          </div>
           )}
 
           {/* Background image with enhanced parallax effect */}
-          <motion.div 
-            className="absolute inset-0 z-0 opacity-[0.07]"
-            style={{
-              backgroundImage: `url(${imagePath})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              x: 100 * mousePosition.x,
-              y: 100 * mousePosition.y,
-              scale: 1.2,
-            }}
-          />
+          {imagePath && (
+            <motion.div 
+              className="absolute inset-0 z-0 opacity-[0.25] dark:opacity-[0.15]"
+              style={{
+                backgroundImage: `url(${imagePath})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                x: 100 * mousePosition.x,
+                y: 100 * mousePosition.y,
+                scale: 1.2,
+              }}
+              suppressHydrationWarning
+            />
+          )}
 
           {/* Secondary image if provided */}
           {secondaryImagePath && (
@@ -831,14 +848,14 @@ export default function ProjectPage({
                   duration: 8,
                   repeat: Infinity,
                   ease: "easeInOut",
-                }}
+              }}
               >
                 <div className="text-blue-500 w-10 h-10 flex items-center justify-center">
                   <FaChartLine size={24} />
-                </div>
+          </div>
               </motion.div>
-              
-              <motion.div
+
+            <motion.div
                 className="absolute bottom-[25%] right-[20%] bg-white dark:bg-gray-800 rounded-full p-4 shadow-lg"
                 style={{ 
                   x: mousePosition.x * -60, 
@@ -925,7 +942,7 @@ export default function ProjectPage({
                   href="#project-details"
                   className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-4 px-10 rounded-full shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 transition-all duration-300 text-lg relative overflow-hidden group"
                   whileHover={{ 
-                    scale: 1.05,
+                    scale: 1.05, 
                     boxShadow: "0 20px 30px rgba(0, 0, 255, 0.2)"
                   }}
                   whileTap={{ scale: 0.95 }}
@@ -947,7 +964,7 @@ export default function ProjectPage({
                   href="#technical-details"
                   className="bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-medium py-4 px-10 rounded-full shadow-lg transition-all duration-300 text-lg relative overflow-hidden group"
                   whileHover={{ 
-                    scale: 1.05,
+                    scale: 1.05, 
                     boxShadow: "0 20px 30px rgba(0, 0, 0, 0.1)"
                   }}
                   whileTap={{ scale: 0.95 }}
@@ -967,9 +984,9 @@ export default function ProjectPage({
               </motion.div>
             </motion.div>
           </div>
-          
+
           {/* Enhanced elegant scroll indicator with motion and interactive feedback */}
-          <motion.div
+          <motion.div 
             className="absolute bottom-10 left-0 right-0 flex justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -989,37 +1006,37 @@ export default function ProjectPage({
             >
               <motion.div
                 className="w-12 h-12 rounded-full border-2 border-gray-300 dark:border-gray-700 flex items-center justify-center mb-2 overflow-hidden relative"
-                animate={{ 
-                  y: [0, 10, 0],
+            animate={{ 
+              y: [0, 10, 0],
                   boxShadow: [
                     "0 0 0 rgba(255, 255, 255, 0.3)",
                     "0 0 20px rgba(255, 255, 255, 0.5)",
                     "0 0 0 rgba(255, 255, 255, 0.3)"
                   ]
-                }}
-                transition={{ 
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
+            }}
+            transition={{ 
+                duration: 2, 
+                repeat: Infinity,
+                ease: "easeInOut"
+            }}
+          >
                 {/* Add ripple effect on hover */}
                 <span className="absolute inset-0 bg-blue-400/20 dark:bg-blue-600/20 transform scale-0 rounded-full group-hover:scale-150 transition-transform duration-700" />
                 
-                <motion.div
-                  animate={{ 
+            <motion.div
+                animate={{
                     y: [0, 4, 0]
-                  }}
-                  transition={{ 
+                }}
+                transition={{
                     duration: 1.5,
-                    repeat: Infinity,
+                  repeat: Infinity,
                     ease: "easeInOut",
                     delay: 0.25
-                  }}
+                }}
                   className="relative z-10"
                 >
                   <FaChevronDown className="text-gray-400 dark:text-gray-600 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors duration-300" size={18} />
-                </motion.div>
+            </motion.div>
               </motion.div>
               <span className="text-sm text-gray-400 dark:text-gray-600 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors duration-300">Scroll</span>
             </motion.a>

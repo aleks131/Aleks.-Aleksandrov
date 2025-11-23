@@ -81,12 +81,12 @@ export default function RootLayout({
           }
         `}} />
       </head>
-      <body className="transition-colors duration-300">
+      <body className="transition-colors duration-300" suppressHydrationWarning>
         {/* Client-side performance initializer */}
         <PerformanceInitializer />
         
         {/* Main content */}
-        <main>{children}</main>
+        <main suppressHydrationWarning>{children}</main>
         
         {/* Performance monitoring script - loads after main content */}
         <Script

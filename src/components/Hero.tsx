@@ -58,7 +58,7 @@ const Hero = () => {
   };
   
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0">
       {/* Enhanced Background with Sparkles */}
       <div 
         className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-indigo-950"
@@ -194,9 +194,9 @@ const Hero = () => {
                   }}
                 />
                 <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto px-6 py-2 relative">
-                  <span className="text-blue-400">Binary</span> life, <span className="text-purple-400">infinite</span> possibilities: 
+                  <span className="text-blue-400">Innovation</span> through <span className="text-purple-400">data engineering</span>: 
                   <br className="hidden md:block" />
-                  <span className="italic">coding tomorrow, analyzing today, engineering always.</span>
+                  <span className="italic">building pipelines today, enabling insights tomorrow, scaling solutions always.</span>
                 </p>
               </motion.div>
               
@@ -210,19 +210,19 @@ const Hero = () => {
                   whileHover={{ scale: 1.05, backgroundColor: "rgba(59, 130, 246, 0.3)" }}
                   className="text-xl md:text-2xl font-medium text-gray-200 px-8 py-3 bg-gray-800/40 backdrop-blur-sm rounded-full border border-blue-500/30 shadow-lg shadow-blue-500/10 transition-all duration-300"
                 >
-                  Business Engineer
-                </motion.span>
-                <motion.span 
-                  whileHover={{ scale: 1.05, backgroundColor: "rgba(168, 85, 247, 0.3)" }}
-                  className="text-xl md:text-2xl font-medium text-gray-200 px-8 py-3 bg-gray-800/40 backdrop-blur-sm rounded-full border border-purple-500/30 shadow-lg shadow-purple-500/10 transition-all duration-300"
-                >
-                  Software Developer
+                  Data Engineer
                 </motion.span>
                 <motion.span 
                   whileHover={{ scale: 1.05, backgroundColor: "rgba(16, 185, 129, 0.3)" }}
                   className="text-xl md:text-2xl font-medium text-gray-200 px-8 py-3 bg-gray-800/40 backdrop-blur-sm rounded-full border border-green-500/30 shadow-lg shadow-green-500/10 transition-all duration-300"
                 >
-                  Data Analyst
+                  Data Scientist
+                </motion.span>
+                <motion.span 
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(168, 85, 247, 0.3)" }}
+                  className="text-xl md:text-2xl font-medium text-gray-200 px-8 py-3 bg-gray-800/40 backdrop-blur-sm rounded-full border border-purple-500/30 shadow-lg shadow-purple-500/10 transition-all duration-300"
+                >
+                  Full-Stack Developer
                 </motion.span>
               </motion.div>
             </div>

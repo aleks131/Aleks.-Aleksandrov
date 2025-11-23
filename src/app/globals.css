@@ -4,7 +4,7 @@
   /* Base theme colors */
   --background: #ffffff;
   --foreground: #171717;
-  
+
   /* Theme variables derived from base colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -14,8 +14,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #121212;
+    --foreground: #ffffff;
   }
 }
 
@@ -23,6 +23,16 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Hide scrollbar for mobile navigation */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 /* Preloader and Progressive Enhancement Styles */

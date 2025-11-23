@@ -202,21 +202,21 @@ const WasteWisePage = () => {
 
   // Define additional properties to be passed directly to ProjectPage
   const technologies = [
-    { name: "CAD Design", icon: <FaCube className="text-blue-400" size={20} /> },
-    { name: "IoT Sensors", icon: <FaMicrochip className="text-green-400" size={20} /> },
-    { name: "Arduino", icon: <SiArduino className="text-teal-400" size={20} /> },
-    { name: "3D Printing", icon: <FaCube className="text-purple-400" size={20} /> },
-    { name: "Automation", icon: <FaRobot className="text-pink-400" size={20} /> },
-    { name: "Wireless Communication", icon: <FaWifi className="text-yellow-400" size={20} /> },
+      { name: "CAD Design", icon: <FaCube className="text-blue-400" size={20} /> },
+      { name: "IoT Sensors", icon: <FaMicrochip className="text-green-400" size={20} /> },
+      { name: "Arduino", icon: <SiArduino className="text-teal-400" size={20} /> },
+      { name: "3D Printing", icon: <FaCube className="text-purple-400" size={20} /> },
+      { name: "Automation", icon: <FaRobot className="text-pink-400" size={20} /> },
+      { name: "Wireless Communication", icon: <FaWifi className="text-yellow-400" size={20} /> },
   ];
 
   const technicalDetails = [
-    "Implemented machine learning models for waste classification using TensorFlow",
-    "Designed custom PCB layouts for sensor integration",
-    "Developed Arduino-based control systems for automated sorting mechanisms",
-    "Created 3D-printed prototypes for mechanical components",
-    "Integrated IoT connectivity using ESP32 modules",
-    "Implemented real-time data visualization dashboard",
+      "Implemented machine learning models for waste classification using TensorFlow",
+      "Designed custom PCB layouts for sensor integration",
+      "Developed Arduino-based control systems for automated sorting mechanisms",
+      "Created 3D-printed prototypes for mechanical components",
+      "Integrated IoT connectivity using ESP32 modules",
+      "Implemented real-time data visualization dashboard",
   ];
 
   // Define results using the local interface
@@ -241,6 +241,12 @@ const WasteWisePage = () => {
       technicalDetails={technicalDetails}
       results={results}
       imagePath="/images/projects/Trash.png"
+      heroBackgroundType="waves"
+      heroOverlayOpacity={0.2}
+      animationIntensity="medium"
+      heroTextGradient={true}
+      heroCtaText="View WasteWise System"
+      heroTechnicalText="Technical Implementation"
     />
   );
 };

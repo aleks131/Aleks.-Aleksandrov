@@ -36,7 +36,6 @@ import {
 } from "react-icons/fa";
 import { SiTableau, SiDatabricks } from "react-icons/si";
 import { useInView } from "framer-motion";
-import Preloader from "@/components/shared/Preloader";
 
 // Register ChartJS components
 ChartJS.register(
@@ -598,29 +597,27 @@ const DataVizPage = () => {
   };
 
   return (
-    <Preloader text="Loading data visualization experience...">
-      <ProjectPage
-        title={projectData.title}
-        overview={projectData.overview}
-        teamSize={projectData.teamSize}
-        duration={projectData.duration}
-        role={projectData.role}
-        metrics={metrics}
-        features={projectData.features}
-        technologies={projectData.technologies}
-        results={projectData.results}
-        technicalDetails={projectData.technicalDetails}
-        imagePath="/images/projects/data.png"
-        customSections={customSections}
-        heroBackgroundType="particles"
-        heroOverlayOpacity={0.15}
-        animationIntensity="high"
-        secondaryImagePath="/images/projects/data.png"
-        heroTextGradient={true}
-        heroCtaText="Explore Visualization Suite"
-        heroTechnicalText="Technical Architecture"
-      />
-    </Preloader>
+    <ProjectPage
+      title={projectData.title}
+      overview={projectData.overview}
+      teamSize={projectData.teamSize}
+      duration={projectData.duration}
+      role={projectData.role}
+      metrics={metrics}
+      features={projectData.features}
+      technologies={projectData.technologies}
+      results={projectData.results}
+      technicalDetails={projectData.technicalDetails}
+      imagePath="/images/projects/data.png"
+      customSections={customSections}
+      heroBackgroundType="particles"
+      heroOverlayOpacity={0.15}
+      animationIntensity="high"
+      secondaryImagePath="/images/projects/data.png"
+      heroTextGradient={true}
+      heroCtaText="Explore Visualization Suite"
+      heroTechnicalText="Technical Architecture"
+    />
   );
 };
 

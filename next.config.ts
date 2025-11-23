@@ -1,8 +1,5 @@
 import type { NextConfig } from "next";
 
-// Base path should include a leading slash but not a trailing slash
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '/Aleks.-Aleksandrov';
-
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   // This helps with the hydration mismatch issue
@@ -16,6 +13,11 @@ const nextConfig: NextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  // Disable dev overlay in production
+  devIndicators: {
+    buildActivity: false,
+    buildActivityPosition: 'bottom-right',
+  },
   // Image optimization configuration
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -23,19 +25,10 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
     minimumCacheTTL: 60,
     domains: [],
-    unoptimized: true, // Unoptimized images for static export
   },
-  // GitHub Pages configuration
-  basePath: basePath,
-  assetPrefix: basePath,
-  // Add export configuration for static site generation
-  output: 'export',
-  // Ensure trailing slashes are consistent
-  trailingSlash: true,
-  // Add experimental features if needed
-  experimental: {
-    // Add any supported experimental features here
-  },
+  // Production optimizations
+  poweredByHeader: false,
+  compress: true,
 };
 
 export default nextConfig;

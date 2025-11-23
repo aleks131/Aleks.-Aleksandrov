@@ -54,6 +54,27 @@ const Experience = () => {
   const experiences: ExperienceItem[] = [
     {
       id: 1,
+      title: "Student Assistant, Commercial Analytics Team",
+      company: "Salling Group",
+      location: "Denmark",
+      duration: "July 2025 - Present",
+      description: [
+        "Gaining solid experience with data scientist tools and methodologies",
+        "Getting familiar with Docker and containerization technologies",
+        "Supporting commercial analytics initiatives and data-driven decision making",
+        "Working with advanced analytics platforms and tools"
+      ],
+      skills: ["Data Science Tools", "Docker", "Commercial Analytics", "Data Analysis"],
+      achievements: [
+        "Developing expertise in modern data science workflows",
+        "Learning containerization and deployment practices"
+      ],
+      type: "work",
+      icon: <FaBriefcase className="text-blue-500 dark:text-blue-400" />,
+      gradient: "from-blue-600 to-cyan-600"
+    },
+    {
+      id: 2,
       title: "Bachelor's in Global Business Engineering",
       company: "VIA University College",
       location: "Denmark",
@@ -69,11 +90,11 @@ const Experience = () => {
         "Developing technical skills through practical applications"
       ],
       type: "education",
-      icon: <FaGraduationCap className="text-purple-600 dark:text-purple-400" />,
-      gradient: "from-purple-500 to-indigo-600"
+      icon: <FaGraduationCap className="text-purple-500 dark:text-purple-400" />,
+      gradient: "from-purple-600 to-indigo-600"
     },
     {
-      id: 2,
+      id: 3,
       title: "Intern, Trade Planning and Pricing",
       company: "Salling Group",
       location: "Denmark",
@@ -89,11 +110,11 @@ const Experience = () => {
         "Improved operational efficiency through workflow automation"
       ],
       type: "work",
-      icon: <FaBriefcase className="text-blue-600 dark:text-blue-400" />,
-      gradient: "from-blue-500 to-cyan-600"
+      icon: <FaBriefcase className="text-blue-500 dark:text-blue-400" />,
+      gradient: "from-blue-600 to-cyan-600"
     },
     {
-      id: 3,
+      id: 4,
       title: "Production Assistant (Part-Time)",
       company: "Salling Group Warehouse",
       location: "Denmark",
@@ -113,7 +134,7 @@ const Experience = () => {
       gradient: "from-cyan-500 to-blue-600"
     },
     {
-      id: 4,
+      id: 5,
       title: "Waiter & Construction Worker",
       company: "Various Locations",
       location: "Bulgaria",
@@ -133,7 +154,7 @@ const Experience = () => {
       gradient: "from-emerald-500 to-teal-600"
     },
     {
-      id: 5,
+      id: 6,
       title: "High School Diploma, Mathematics & English",
       company: "Vasil Drumev High School",
       location: "Veliko Tarnovo, Bulgaria",
@@ -236,7 +257,7 @@ const Experience = () => {
           className="absolute top-40 right-10 w-80 h-80 border border-gray-200 dark:border-gray-700 rounded-full opacity-20"
           style={{ rotate }}
         />
-        <motion.div 
+        <motion.div
           className="absolute bottom-40 left-10 w-40 h-40 border border-gray-200 dark:border-gray-700 rounded-full opacity-10"
           style={{ rotate: rotateReverse }}
         />
@@ -341,7 +362,9 @@ const Experience = () => {
               
               {/* Enhanced Content Card */}
               <motion.div 
-                className={`ml-20 md:ml-0 md:w-[calc(50%-3rem)] relative group`}
+                className={`ml-20 md:ml-0 md:w-[calc(50%-3rem)] relative group ${
+                  (item.title.includes("Student Assistant") || item.title.includes("Intern")) ? "scale-[1.02] z-20 border-2 border-blue-500/30 shadow-xl" : ""
+                }`}
                 whileHover={{ 
                   y: -12, 
                   boxShadow: "0 25px 50px -12px rgba(0,0,0,0.15)",
@@ -395,11 +418,11 @@ const Experience = () => {
                           repeatDelay: 2
                         }}
                       />
-                      {item.icon}
+                    {item.icon}
                     </motion.div>
                     
                     <h3 className="text-xl font-bold mb-1 group-hover:translate-x-1 transition-transform duration-300">{item.title}</h3>
-                    
+                
                     <div className="flex flex-col space-y-1">
                       <div className="flex items-center gap-2 text-white/90">
                         <FaBuilding className="text-white/80" />

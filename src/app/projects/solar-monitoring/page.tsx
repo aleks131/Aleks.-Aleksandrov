@@ -218,7 +218,13 @@ const SolarMonitoringPage = () => {
       "Integrated IoT sensors with cloud infrastructure",
       "Implemented machine learning models for predictive maintenance",
     ],
-    imagePath: "/images/projects/solar-monitoring-hero.jpg",
+    imagePath: "/images/projects/solar.png",
+    heroBackgroundType: "gradient",
+    heroOverlayOpacity: 0.2,
+    animationIntensity: "medium",
+    heroTextGradient: true,
+    heroCtaText: "View Solar Monitoring System",
+    heroTechnicalText: "Technical Implementation",
     customSections: [
       {
         title: "Performance Analytics",

@@ -31,7 +31,6 @@ import {
   FaExclamationTriangle,
 } from "react-icons/fa";
 import { SiMysql, SiSpringboot } from "react-icons/si";
-import Preloader from "@/components/shared/Preloader";
 
 // Register ChartJS components
 ChartJS.register(
@@ -286,28 +285,26 @@ const IMSPage = () => {
   };
 
   return (
-    <Preloader text="Loading IMS project experience...">
-      <ProjectPage
-        title="International Market Selection Software"
-        overview="Data-driven software solution for Guldmann A/S, revolutionizing their market expansion strategy through advanced analytics and automated market assessment."
-        teamSize={projectData.teamSize}
-        duration="6 weeks"
-        role="Lead Analyst"
-        metrics={metrics}
-        features={projectData.features}
-        technologies={projectData.technologies}
-        results={projectData.results}
-        technicalDetails={projectData.technicalDetails}
-        imagePath="/images/projects/ims.png"
-        customSections={customSections}
-        heroBackgroundType="grid"
-        heroOverlayOpacity={0.15}
-        animationIntensity="medium"
-        heroTextGradient={true}
-        heroCtaText="View Market Analysis Tool"
-        heroTechnicalText="Technical Implementation"
-      />
-    </Preloader>
+    <ProjectPage
+      title="International Market Selection Software"
+      overview="Data-driven software solution for Guldmann A/S, revolutionizing their market expansion strategy through advanced analytics and automated market assessment."
+      teamSize={projectData.teamSize}
+      duration="6 weeks"
+      role="Lead Analyst"
+      metrics={metrics}
+      features={projectData.features}
+      technologies={projectData.technologies}
+      results={projectData.results}
+      technicalDetails={projectData.technicalDetails}
+      imagePath="/images/projects/ims.png"
+      customSections={customSections}
+      heroBackgroundType="grid"
+      heroOverlayOpacity={0.15}
+      animationIntensity="medium"
+      heroTextGradient={true}
+      heroCtaText="View Market Analysis Tool"
+      heroTechnicalText="Technical Implementation"
+    />
   );
 };
 

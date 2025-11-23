@@ -220,7 +220,13 @@ const HandmadePage = () => {
       "Developed user testing protocols",
       "Implemented analytics tracking system",
     ],
-    imagePath: "/images/projects/handmade.webp",
+    imagePath: "/images/projects/handmade.png",
+    heroBackgroundType: "particles",
+    heroOverlayOpacity: 0.15,
+    animationIntensity: "high",
+    heroTextGradient: true,
+    heroCtaText: "View Handmade Platform",
+    heroTechnicalText: "Technical Implementation",
     customSections: [
       {
         title: "Platform Performance & Insights",

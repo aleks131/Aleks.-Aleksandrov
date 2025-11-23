@@ -21,8 +21,8 @@ const Preloader: React.FC<PreloaderProps> = ({
   spinner = true,
   text = 'Loading amazing experience...',
   textColor = 'text-gray-700 dark:text-gray-300',
-  minDisplayTime = 800, // Minimum time to show preloader to avoid flash
-  maxDisplayTime = 5000, // Maximum time as failsafe
+  minDisplayTime = 0, // No minimum delay for instant loading
+  maxDisplayTime = 500, // Maximum time as failsafe
   children
 }) => {
   const [loading, setLoading] = useState(true);
@@ -41,30 +41,14 @@ const Preloader: React.FC<PreloaderProps> = ({
     // Initialize project preloading
     const setup = async () => {
       try {
-        // Start progress animation
-        const progressInterval = setInterval(() => {
-          setProgress(prev => {
-            // Move progress forward gradually, but leave room for completion
-            const newProgress = prev + (100 - prev) * 0.05;
-            return newProgress > 95 ? 95 : newProgress;
-          });
-        }, 100);
-        
-        // Begin asset preloading
-        await initializeProjectPage();
-        
-        // Clear interval once loading is complete
-        clearInterval(progressInterval);
+        // Instant loading - no preloader delay
         setProgress(100);
+        setLoading(false);
         
-        // Calculate how long the preloader has been visible
-        const elapsedTime = performance.now() - startTimeRef.current;
-        const remainingTime = Math.max(0, minDisplayTime - elapsedTime);
-        
-        // Wait at least minDisplayTime before hiding preloader
-        setTimeout(() => {
-          setLoading(false);
-        }, remainingTime);
+        // Begin asset preloading in background (non-blocking)
+        initializeProjectPage().catch(() => {
+          // Silent fail - don't block page
+        });
       } catch (error) {
         console.error('Error during page initialization:', error);
         // Show full progress and remove loader even if there's an error
@@ -102,7 +86,8 @@ const Preloader: React.FC<PreloaderProps> = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.2 }}
+      suppressHydrationWarning
     >
       {spinner && (
         <div className="relative w-20 h-20 mb-6">

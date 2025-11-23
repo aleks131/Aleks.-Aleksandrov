@@ -11,7 +11,6 @@ import {
   FaBrain, FaLightbulb
 } from "react-icons/fa";
 import { SiTableau, SiDotnet } from "react-icons/si";
-import { HiSparkles } from "react-icons/hi";
 import SectionTitle from "./shared/SectionTitle";
 
 // Skill card type
@@ -26,8 +25,8 @@ interface SkillCardType {
 const SkillCard = React.memo(({ skill, index }: { skill: SkillCardType, index: number }) => {
   return (
     <motion.div
-      className={`flex flex-col items-center justify-center p-6 rounded-xl shadow-sm bg-white dark:bg-gray-800 
-        border border-gray-100 dark:border-gray-700 relative group/skill overflow-hidden hover:shadow-lg transition-all duration-300`}
+      className={`flex flex-col items-center justify-center p-6 rounded-xl shadow-sm bg-white/5 dark:bg-[#1E1E1E] 
+        border border-gray-200 dark:border-gray-700 relative group/skill overflow-hidden hover:shadow-lg transition-all duration-300 hover:border-blue-500 dark:hover:border-blue-500`}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ 
         opacity: 1, 
@@ -43,14 +42,12 @@ const SkillCard = React.memo(({ skill, index }: { skill: SkillCardType, index: n
         transition: { duration: 0.2 }
       }}
     >
-      {/* Subtle background gradient */}
-      <div className={`absolute inset-0 opacity-10 ${skill.color}`} />
       
       <div className="mb-4 relative">
         {skill.icon}
       </div>
       <h4 className="font-medium text-center text-gray-800 dark:text-gray-200">{skill.name}</h4>
-      <span className="text-xs text-gray-500 dark:text-gray-400 mt-2 px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-700">{skill.category}</span>
+      <span className="text-xs text-gray-500 dark:text-gray-400 mt-2 px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800">{skill.category}</span>
     </motion.div>
   );
 });
@@ -76,10 +73,10 @@ const SkillPill = React.memo(({ skill, index }: { skill: { name: string, color: 
         y: -5,
         transition: { duration: 0.2 }
       }}
-      className={`${skill.color} px-5 py-2.5 rounded-full font-medium shadow-sm 
-        hover:shadow-md transition-all duration-300 flex items-center gap-2`}
+      className={`bg-transparent border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-5 py-2.5 rounded-full font-medium shadow-sm 
+        hover:shadow-md hover:border-blue-500 dark:hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 flex items-center gap-2`}
     >
-      <span className="w-2 h-2 rounded-full bg-white/70 inline-block"></span>
+      <span className="w-2 h-2 rounded-full bg-blue-500 inline-block"></span>
       {skill.name}
     </motion.div>
   );
@@ -99,7 +96,7 @@ const Skills = () => {
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -75]);
   const y3 = useTransform(scrollYProgress, [0, 1], [0, -40]);
   
-  // Skills by category with softer colors for better contrast
+  // Skills by category with softer colors for better contrast - Enhanced with Data Science skills
   const dataAnalysisSkills = useMemo(() => [
     { name: "Python", color: "bg-blue-400 text-blue-50" },
     { name: "SQL", color: "bg-indigo-400 text-indigo-50" },
@@ -108,7 +105,18 @@ const Skills = () => {
     { name: "R", color: "bg-sky-400 text-sky-50" },
     { name: "Datasphere", color: "bg-violet-400 text-violet-50" },
     { name: "Tableau", color: "bg-blue-300 text-blue-800" },
-    { name: "Data Gathering", color: "bg-rose-400 text-rose-50" }
+    { name: "Data Gathering", color: "bg-rose-400 text-rose-50" },
+    { name: "Pandas", color: "bg-blue-500 text-blue-50" },
+    { name: "NumPy", color: "bg-cyan-400 text-cyan-50" },
+    { name: "Scikit-learn", color: "bg-orange-400 text-orange-50" },
+    { name: "Matplotlib", color: "bg-green-400 text-green-50" },
+    { name: "Seaborn", color: "bg-purple-400 text-purple-50" },
+    { name: "Jupyter", color: "bg-yellow-400 text-yellow-50" },
+    { name: "Data Visualization", color: "bg-pink-400 text-pink-50" },
+    { name: "Statistical Analysis", color: "bg-teal-400 text-teal-50" },
+    { name: "Machine Learning", color: "bg-indigo-500 text-indigo-50" },
+    { name: "Data Cleaning", color: "bg-red-400 text-red-50" },
+    { name: "ETL Processes", color: "bg-amber-500 text-amber-50" }
   ], []);
   
   const programmingSkills = useMemo(() => [
@@ -144,7 +152,7 @@ const Skills = () => {
     }
   ], []);
   
-  // Tools and technologies in card format with more subtle gradient backgrounds
+  // Tools and technologies in card format with more subtle gradient backgrounds - Enhanced with Docker and Data Science tools
   const skillCards = useMemo(() => [
     { name: "Python", icon: <FaPython size={32} className="text-blue-500" />, category: "Programming", color: "bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/40" },
     { name: "R", icon: <FaChartBar size={32} className="text-blue-500" />, category: "Data & Analytics", color: "bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/40" },
@@ -159,9 +167,12 @@ const Skills = () => {
     { name: "Excel", icon: <FaFileExcel size={32} className="text-emerald-500" />, category: "Data & Analytics", color: "bg-gradient-to-br from-emerald-100 to-emerald-200 dark:from-emerald-900/40 dark:to-emerald-800/40" },
     { name: "Tableau", icon: <SiTableau size={32} className="text-blue-500" />, category: "Data & Analytics", color: "bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/40" },
     { name: "Datasphere", icon: <FaChartBar size={32} className="text-violet-500" />, category: "Data & Analytics", color: "bg-gradient-to-br from-violet-100 to-violet-200 dark:from-violet-900/40 dark:to-violet-800/40" },
+    { name: "Docker", icon: <FaDocker size={32} className="text-cyan-500" />, category: "DevOps & Containers", color: "bg-gradient-to-br from-cyan-100 to-cyan-200 dark:from-cyan-900/40 dark:to-cyan-800/40" },
     { name: "Azure ML", icon: <FaMicrosoft size={32} className="text-blue-500" />, category: "Cloud", color: "bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/40" },
     { name: "Agile", icon: <FaGitAlt size={32} className="text-orange-500" />, category: "Project Management", color: "bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900/40 dark:to-orange-800/40" },
     { name: "Azure", icon: <FaMicrosoft size={32} className="text-blue-500" />, category: "Cloud", color: "bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/40" },
+    { name: "Pandas", icon: <FaBrain size={32} className="text-blue-600" />, category: "Data Science", color: "bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/40" },
+    { name: "Scikit-learn", icon: <FaLightbulb size={32} className="text-orange-500" />, category: "Data Science", color: "bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900/40 dark:to-orange-800/40" },
   ], []);
   
   return (
@@ -181,19 +192,19 @@ const Skills = () => {
             ease: "easeInOut"
           }}
         />
-        <motion.div 
+          <motion.div
           className="absolute bottom-20 right-0 w-[550px] h-[550px] bg-violet-300/10 dark:bg-violet-600/10 rounded-full filter blur-[100px]"
           style={{ y: y2, x: 50 }}
-          animate={{
+              animate={{ 
             opacity: [0.1, 0.2, 0.1],
-          }}
-          transition={{
+              }}
+              transition={{
             duration: 7,
-            repeat: Infinity,
+                repeat: Infinity,
             ease: "easeInOut",
             delay: 1
-          }}
-        />
+              }}
+            />
         
         {/* Enhanced grid pattern with parallax */}
         <div className="absolute inset-0 opacity-5"
@@ -210,7 +221,6 @@ const Skills = () => {
         <SectionTitle 
           title="Technical Skills"
           subtitle="A comprehensive set of technical capabilities spanning data analysis, programming, web development, and cloud technologies that power my portfolio projects."
-          icon={<HiSparkles className="text-amber-400" size={24} />}
         />
         
         {/* Skills sections with better spacing */}
@@ -229,7 +239,7 @@ const Skills = () => {
                   <FaChartPie className="text-blue-500 dark:text-blue-400" size={24} />
                 </div>
                 <h3 className="text-xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-violet-500">
-                  Data Analysis
+                Data Analysis
                 </h3>
                 <div className="h-1 w-16 bg-gradient-to-r from-blue-400 to-violet-400 mt-2 rounded-full"></div>
               </div>
@@ -256,7 +266,7 @@ const Skills = () => {
                   <FaCode className="text-violet-500 dark:text-violet-400" size={24} />
                 </div>
                 <h3 className="text-xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-indigo-500">
-                  Programming & Web Development
+                Programming & Web Development
                 </h3>
                 <div className="h-1 w-16 bg-gradient-to-r from-violet-400 to-indigo-400 mt-2 rounded-full"></div>
               </div>
@@ -283,8 +293,8 @@ const Skills = () => {
                   <FaLightbulb className="text-emerald-500 dark:text-emerald-400" size={24} />
                 </div>
                 <h3 className="text-xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-blue-500">
-                  Project Management Skills
-                </h3>
+                Project Management Skills
+              </h3>
                 <div className="h-1 w-16 bg-gradient-to-r from-emerald-400 to-blue-400 mt-2 rounded-full"></div>
               </div>
               
@@ -323,8 +333,8 @@ const Skills = () => {
                   <FaBrain className="text-blue-500 dark:text-blue-400" size={24} />
                 </div>
                 <h3 className="text-xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-violet-500">
-                  Technologies & Tools
-                </h3>
+                Technologies & Tools
+              </h3>
                 <div className="h-1 w-16 bg-gradient-to-r from-blue-400 to-violet-400 mt-2 rounded-full"></div>
               </div>
               

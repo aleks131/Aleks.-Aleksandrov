@@ -1,19 +1,40 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Image from "next/image";
 import Link from "next/link";
-import { FaCode, FaChartLine, FaProjectDiagram, FaLaptopCode, FaEnvelope, FaArrowRight, FaLinkedin, FaGithub, FaJava, FaDatabase, FaChartBar } from "react-icons/fa";
+import { FaCode, FaChartLine, FaProjectDiagram, FaLaptopCode, FaEnvelope, FaArrowRight, FaLinkedin, FaJava, FaDatabase, FaChartBar } from "react-icons/fa";
 import { SiTableau, SiPython, SiReact } from "react-icons/si";
 import { DiCssdeck } from "react-icons/di";
 import { MdDoubleArrow } from "react-icons/md";
-import { IoSparkles } from "react-icons/io5";
-import { BsStars } from "react-icons/bs";
 import SectionTitle from "./shared/SectionTitle";
 
 const About = () => {
+  const [isMounted, setIsMounted] = useState(false);
+  const [particlePositions, setParticlePositions] = useState<Array<{
+    top: string;
+    left: string;
+    scale: number;
+    duration: number;
+    delay: number;
+  }>>([]);
+
+  useEffect(() => {
+    setIsMounted(true);
+    if (typeof window !== 'undefined') {
+      setParticlePositions(
+        [...Array(6)].map((_, i) => ({
+          top: `${20 + (i * 10 + 5)}%`,
+          left: `${20 + (i * 12 + 8)}%`,
+          scale: 0.5 + (i % 3) * 0.2,
+          duration: 2 + (i % 3) * 0.5,
+          delay: i * 0.3,
+        }))
+      );
+    }
+  }, []);
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
@@ -53,14 +74,14 @@ const About = () => {
   };
 
   const statItems = [
-    { value: "10+", label: "Projects Completed", color: "from-blue-400 to-blue-600" },
-    { value: "4+", label: "Data Analysis Tools", color: "from-purple-400 to-purple-600" },
-    { value: "5+", label: "Technical Skills", color: "from-green-400 to-green-600" },
-    { value: "3", label: "Languages", color: "from-amber-400 to-amber-600" }
+    { value: "15+", label: "Projects Completed", color: "from-blue-400 to-blue-600" },
+    { value: "20+", label: "Technologies", color: "from-purple-400 to-purple-600" },
+    { value: "∞", label: "Data Passion", color: "from-green-400 to-green-600" },
+    { value: "∞", label: "Innovation", color: "from-amber-400 to-amber-600" }
   ];
 
   return (
-    <section id="about" className="py-32 relative overflow-hidden">
+    <section id="about" className="py-32 relative overflow-hidden" suppressHydrationWarning>
       {/* Animated background elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         {/* Moving gradient blobs */}
@@ -126,8 +147,7 @@ const About = () => {
         {/* Replace custom heading with SectionTitle component */}
         <SectionTitle 
           title="About Me"
-          subtitle="Passionate about turning data into actionable insights and building solutions that make a difference. Visit my full bio to learn about my journey, hobbies, and personal interests."
-          icon={<IoSparkles className="text-yellow-400" size={24} />}
+          subtitle="Passionate about innovation, data engineering, and transforming complex datasets into strategic business intelligence. Visit my full bio to learn about my journey, experiences, and personal interests."
         />
 
         {/* Main content */}
@@ -152,44 +172,63 @@ const About = () => {
                   ease: "easeInOut"
                 }}
               >
-                {[...Array(6)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-3 h-3 bg-blue-400 rounded-full"
-                    style={{
-                      top: `${20 + Math.random() * 60}%`,
-                      left: `${20 + Math.random() * 60}%`,
-                      scale: Math.random() * 0.5 + 0.5,
-                    }}
-                    animate={{
-                      opacity: [0, 1, 0],
-                      scale: [0.5, 1, 0.5],
-                    }}
-                    transition={{
-                      duration: 2 + Math.random() * 2,
-                      repeat: Infinity,
-                      delay: Math.random() * 2,
-                    }}
-                  />
-                ))}
+                {isMounted && [...Array(6)].map((_, i) => {
+                  const topPos = 20 + (i * 10 + 5);
+                  const leftPos = 20 + (i * 12 + 8);
+                  const scaleVal = 0.5 + (i % 3) * 0.2;
+                  const duration = 2 + (i % 3) * 0.5;
+                  const delay = i * 0.3;
+                  return (
+                    <motion.div
+                      key={i}
+                      className="absolute w-3 h-3 bg-blue-400 rounded-full"
+                      style={{
+                        top: `${topPos}%`,
+                        left: `${leftPos}%`,
+                        scale: scaleVal,
+                      }}
+                      animate={{
+                        opacity: [0, 1, 0],
+                        scale: [0.5, 1, 0.5],
+                      }}
+                      transition={{
+                        duration,
+                        repeat: Infinity,
+                        delay,
+                      }}
+                      suppressHydrationWarning
+                    />
+                  );
+                })}
               </motion.div>
               
               {/* Enhanced profile frame with 3D effect */}
               <motion.div 
-                className="relative w-80 h-80 z-10"
-                whileHover={{ scale: 1.02, rotate: 0 }}
+                className="relative w-80 h-80 md:w-96 md:h-96 z-10"
+                whileHover={{ scale: 1.03 }}
                 transition={{ duration: 0.3 }}
               >
                 {/* Glow effect */}
-                <div className="absolute -inset-4 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-2xl"></div>
+                <motion.div 
+                  className="absolute -inset-6 bg-gradient-to-br from-blue-500/30 via-purple-500/30 to-pink-500/30 rounded-full blur-3xl"
+                  animate={{
+                    opacity: [0.4, 0.6, 0.4],
+                    scale: [1, 1.1, 1],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
                 
                 {/* Profile image with enhanced frame */}
-                <div className="relative w-full h-full overflow-hidden rounded-3xl border-4 border-white dark:border-gray-800 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500 bg-white dark:bg-gray-800">
+                <div className="relative w-full h-full overflow-hidden rounded-3xl shadow-2xl bg-gray-900/50 border-2 border-white/10">
                   {/* Animated gradient overlay */}
                   <motion.div 
-                    className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 z-10"
+                    className="absolute inset-0 bg-gradient-to-br from-blue-500/15 via-purple-500/15 to-pink-500/15 z-20 pointer-events-none"
                     animate={{
-                      opacity: [0, 0.5, 0],
+                      opacity: [0.2, 0.5, 0.2],
                     }}
                     transition={{
                       duration: 5,
@@ -198,29 +237,47 @@ const About = () => {
                     }}
                   />
                   
-                  {/* Profile content */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white">
-                    <div className="text-center">
-                      <div className="text-7xl font-bold mb-2">AA</div>
-                      <div className="flex justify-center">
-                        <BsStars className="text-yellow-300 text-xl" />
-                      </div>
-                    </div>
-                  </div>
+                  {/* Actual profile image */}
+                  <Image
+                    src="/images/about/Aleks-portfolio.jpg"
+                    alt="Aleks Aleksandrov"
+                    fill
+                    className="object-cover relative z-10 transition-all duration-700 group-hover:scale-110"
+                    priority
+                    sizes="(max-width: 640px) 320px, 384px"
+                    quality={95}
+                  />
                   
-                  {/* Decorative corner accents */}
-                  <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-white/50 rounded-tl-md"></div>
-                  <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-white/50 rounded-tr-md"></div>
-                  <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-white/50 rounded-bl-md"></div>
-                  <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-white/50 rounded-br-md"></div>
+                  {/* Subtle gradient overlay for depth */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none z-30" />
                   
-                  {/* You can uncomment and use when you have an actual image */}
-                  {/* <Image
-                    src="/your-photo.jpg"
-                    alt="Profile"
-                    layout="fill"
-                    objectFit="cover"
-                  /> */}
+                  {/* Animated sparkle effects */}
+                  {isMounted && [...Array(8)].map((_, i) => {
+                    const angle = (i * 45) % 360;
+                    const radius = 35 + (i % 3) * 8;
+                    const left = 50 + Math.cos(angle * Math.PI / 180) * radius;
+                    const top = 50 + Math.sin(angle * Math.PI / 180) * radius;
+                    return (
+                      <motion.div
+                        key={i}
+                        className="absolute w-2 h-2 bg-blue-400 rounded-full z-40"
+                        style={{
+                          left: `${left}%`,
+                          top: `${top}%`,
+                        }}
+                        animate={{
+                          scale: [0, 1.5, 0],
+                          opacity: [0, 1, 0],
+                          rotate: [0, 360],
+                        }}
+                        transition={{
+                          duration: 2.5 + (i % 2) * 0.5,
+                          repeat: Infinity,
+                          delay: i * 0.25,
+                        }}
+                      />
+                    );
+                  })}
                 </div>
               </motion.div>
               
@@ -329,36 +386,25 @@ const About = () => {
           >
             <motion.h3 
               variants={itemVariants}
-              className="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-200 relative"
+              className="text-3xl md:text-4xl font-bold mb-6 text-gray-800 dark:text-gray-200 relative"
             >
-              <span className="inline-block">
-                <motion.span
-                  className="absolute -left-5 -top-1 text-blue-500 opacity-70"
-                  animate={{ scale: [1, 1.2, 1], rotate: [0, 5, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  <IoSparkles size={22} />
-                </motion.span>
-                Global Business Engineering Student & Data Enthusiast
+              <span className="inline-block bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600">
+                Data Engineer & Data Scientist
               </span>
             </motion.h3>
             
             <motion.div 
               variants={itemVariants}
-              className="space-y-4"
+              className="space-y-5"
             >
-              <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
-                I'm a 23-year-old Global Business Engineering student from Aarhus, Denmark, with a passion for <span className="text-blue-600 dark:text-blue-400 font-semibold relative inline-block px-1">
-                  <span className="absolute inset-0 bg-blue-100 dark:bg-blue-900/30 rounded-md -z-10"></span>
-                  transforming complex data into actionable insights
-                </span>. Currently specializing in data analytics and project management, I bridge the gap between technical implementation and business strategy.
+              <p className="text-gray-700 dark:text-gray-300 text-lg md:text-xl leading-relaxed">
+                As a <span className="text-blue-600 dark:text-blue-400 font-semibold">Data Engineer</span> and <span className="text-purple-600 dark:text-purple-400 font-semibold">Data Scientist</span>, I'm driven by innovation in transforming complex datasets into strategic business intelligence. 
+                My passion lies in building robust <span className="text-gray-900 dark:text-gray-100 font-semibold">ETL pipelines</span>, designing scalable <span className="text-gray-900 dark:text-gray-100 font-semibold">Data Warehousing</span> solutions, and architecting <span className="text-gray-900 dark:text-gray-100 font-semibold">Cloud-based data platforms</span>.
               </p>
               
-              <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
-                With a background spanning both <span className="text-purple-600 dark:text-purple-400 font-semibold relative inline-block px-1">
-                  <span className="absolute inset-0 bg-purple-100 dark:bg-purple-900/30 rounded-md -z-10"></span>
-                  software development and business analytics
-                </span>, I bring a unique perspective to problem-solving. I thrive in environments where I can leverage data to drive decision-making and optimize business processes.
+              <p className="text-gray-700 dark:text-gray-300 text-lg md:text-xl leading-relaxed">
+                Currently working with cutting-edge data science tools, Docker containerization, and modern data engineering practices at <span className="text-blue-600 dark:text-blue-400 font-semibold">Salling Group</span> while pursuing my Global Business Engineering studies at <span className="text-purple-600 dark:text-purple-400 font-semibold">VIA University College</span> in Aarhus, Denmark. 
+                I specialize in creating end-to-end data solutions that drive meaningful business impact and innovation.
               </p>
             </motion.div>
             
@@ -369,28 +415,28 @@ const About = () => {
             >
               {[
                 { 
-                  icon: <FaChartLine className="text-blue-600 dark:text-blue-400" size={24} />, 
-                  title: "Data Analysis",
-                  description: "Transforming raw data into actionable business insights",
+                  icon: <FaDatabase className="text-blue-600 dark:text-blue-400" size={24} />, 
+                  title: "Data Engineering",
+                  description: "Building robust ETL pipelines and scalable data architectures",
                   color: "from-blue-500 to-blue-700"
                 },
                 { 
-                  icon: <FaProjectDiagram className="text-purple-600 dark:text-purple-400" size={24} />, 
-                  title: "Project Management",
-                  description: "Leading cross-functional teams with Agile methodology",
+                  icon: <FaChartLine className="text-purple-600 dark:text-purple-400" size={24} />, 
+                  title: "Data Science",
+                  description: "Transforming complex datasets into strategic business intelligence",
                   color: "from-purple-500 to-purple-700" 
                 },
                 { 
                   icon: <FaCode className="text-green-600 dark:text-green-400" size={24} />, 
-                  title: "Software Development",
-                  description: "Building solutions with Python, Java, C#, and web technologies",
+                  title: "Cloud Architecture",
+                  description: "Designing scalable cloud-based data platforms and solutions",
                   color: "from-green-500 to-green-700"
                 },
                 { 
-                  icon: <FaLaptopCode className="text-red-600 dark:text-red-400" size={24} />, 
-                  title: "Business Intelligence",
-                  description: "Creating interactive dashboards and predictive models",
-                  color: "from-red-500 to-red-700"
+                  icon: <FaLaptopCode className="text-amber-600 dark:text-amber-400" size={24} />, 
+                  title: "Full-Stack Development",
+                  description: "Building end-to-end solutions with modern technologies",
+                  color: "from-amber-500 to-amber-700"
                 },
               ].map((item, i) => (
                 <motion.div 
@@ -430,16 +476,27 @@ const About = () => {
               variants={itemVariants}
               className="mt-10 flex flex-col sm:flex-row gap-6 items-center"
             >
-              <Link href="/about" passHref>
+              <Link href="/about" prefetch={true} className="relative inline-flex group">
                 <motion.div
                   className="relative inline-flex group"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   {/* Enhanced button glow effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur-md opacity-70 group-hover:opacity-100 transition-opacity duration-200 animate-pulse"></div>
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur-md opacity-70 group-hover:opacity-100 transition-opacity duration-200"
+                    animate={{ 
+                      opacity: [0.7, 0.9, 0.7],
+                      scale: [1, 1.05, 1]
+                    }}
+                    transition={{ 
+                      duration: 2, 
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
                   
-                  <button className="relative z-10 bg-white dark:bg-gray-900 text-gray-800 dark:text-white font-semibold py-3 px-8 rounded-full border border-gray-200 dark:border-gray-700 hover:border-transparent transition-colors duration-300 flex items-center gap-2">
+                  <span className="relative z-10 bg-white dark:bg-gray-900 text-gray-800 dark:text-white font-semibold py-3 px-8 rounded-full border border-gray-200 dark:border-gray-700 hover:border-transparent transition-all duration-300 flex items-center gap-2 cursor-pointer">
                     Read My Full Story
                     <motion.div
                       animate={{ x: [0, 4, 0] }}
@@ -447,15 +504,14 @@ const About = () => {
                     >
                       <MdDoubleArrow />
                     </motion.div>
-                  </button>
+                  </span>
                 </motion.div>
               </Link>
               
               {/* Social links with enhanced hover effect */}
               <div className="flex gap-4 items-center">
                 {[
-                  { href: "https://linkedin.com/in/yourusername", icon: <FaLinkedin size={24} />, color: "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600" },
-                  { href: "https://github.com/yourusername", icon: <FaGithub size={24} />, color: "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-700 hover:text-white dark:hover:bg-gray-700" },
+                  { href: "https://www.linkedin.com/in/aleks-aleksandrov-42a472238/", icon: <FaLinkedin size={24} />, color: "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600" },
                   { href: "#contact", icon: <FaEnvelope size={24} />, color: "bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 hover:bg-green-600 hover:text-white dark:hover:bg-green-600" },
                 ].map((link, i) => (
                   <motion.a

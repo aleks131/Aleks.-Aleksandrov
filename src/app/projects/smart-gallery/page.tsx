@@ -16,7 +16,6 @@ import {
   FaCode,
 } from "react-icons/fa";
 import { SiNextdotjs, SiTypescript, SiGoogledrive } from "react-icons/si";
-import Preloader from "@/components/shared/Preloader";
 import type { Metric } from "@/types/project";
 import { convertMetrics } from "@/utils/projectHelpers";
 
@@ -140,60 +139,58 @@ const SmartGalleryPage = () => {
   ];
 
   const features = [
-    {
-      title: "Real-time Sync",
-      description: "Instant content updates through Google Drive integration, automatically detecting and displaying new or modified content.",
-      icon: <FaSync className="text-blue-500" size={24} />,
-    },
-    {
-      title: "Smart Scheduling",
-      description: "Automated schedule updates using VBA-powered Excel integration, converting daily plans to visual displays.",
-      icon: <FaCalendar className="text-green-500" size={24} />,
-    },
-    {
-      title: "Multi-format Support",
-      description: "Seamless handling of various content types including images, videos, and dynamic schedule displays.",
-      icon: <FaImages className="text-purple-500" size={24} />,
-    },
-    {
-      title: "Remote Management",
-      description: "Easy content management from anywhere through Google Drive access, eliminating the need for physical updates.",
-      icon: <FaCloud className="text-yellow-500" size={24} />,
-    },
+      {
+        title: "Real-time Sync",
+        description: "Instant content updates through Google Drive integration, automatically detecting and displaying new or modified content.",
+        icon: <FaSync className="text-blue-500" size={24} />,
+      },
+      {
+        title: "Smart Scheduling",
+        description: "Automated schedule updates using VBA-powered Excel integration, converting daily plans to visual displays.",
+        icon: <FaCalendar className="text-green-500" size={24} />,
+      },
+      {
+        title: "Multi-format Support",
+        description: "Seamless handling of various content types including images, videos, and dynamic schedule displays.",
+        icon: <FaImages className="text-purple-500" size={24} />,
+      },
+      {
+        title: "Remote Management",
+        description: "Easy content management from anywhere through Google Drive access, eliminating the need for physical updates.",
+        icon: <FaCloud className="text-yellow-500" size={24} />,
+      },
   ];
 
   const technicalDetails = [
-    "Implemented real-time file monitoring using Google Drive API",
-    "Created VBA scripts for automated Excel data extraction",
-    "Developed responsive image and video galleries with Next.js",
-    "Implemented automatic format conversion for various file types",
-    "Created a caching system for optimal performance",
-    "Designed fail-safe mechanisms for continuous operation",
+      "Implemented real-time file monitoring using Google Drive API",
+      "Created VBA scripts for automated Excel data extraction",
+      "Developed responsive image and video galleries with Next.js",
+      "Implemented automatic format conversion for various file types",
+      "Created a caching system for optimal performance",
+      "Designed fail-safe mechanisms for continuous operation",
   ];
 
   return (
-    <Preloader text="Loading smart gallery experience...">
-      <ProjectPage 
-        title="Smart Gallery & Screen"
-        overview="A Next.js-powered digital signage solution with real-time content synchronization from Google Drive and automated schedule updates through Excel integration."
-        teamSize="1"
-        duration="8 weeks"
-        role="Full Stack Developer"
-        metrics={convertMetrics(metrics)}
-        features={features}
-        technologies={technologies}
-        results={convertMetrics(results)} 
-        technicalDetails={technicalDetails}
-        imagePath="/images/projects/gallery.png"
-        customSections={customSections}
-        heroBackgroundType="particles"
-        heroOverlayOpacity={0.2}
-        animationIntensity="medium"
-        heroTextGradient={true}
-        heroCtaText="View Gallery Details"
-        heroTechnicalText="Technical Implementation"
-      />
-    </Preloader>
+    <ProjectPage 
+      title="Smart Gallery & Screen"
+      overview="A Next.js-powered digital signage solution with real-time content synchronization from Google Drive and automated schedule updates through Excel integration."
+      teamSize="1"
+      duration="8 weeks"
+      role="Full Stack Developer"
+      metrics={convertMetrics(metrics)}
+      features={features}
+      technologies={technologies}
+      results={convertMetrics(results)} 
+      technicalDetails={technicalDetails}
+      imagePath="/images/projects/gallery.png"
+      customSections={customSections}
+      heroBackgroundType="particles"
+      heroOverlayOpacity={0.2}
+      animationIntensity="medium"
+      heroTextGradient={true}
+      heroCtaText="View Gallery Details"
+      heroTechnicalText="Technical Implementation"
+    />
   );
 };
 
