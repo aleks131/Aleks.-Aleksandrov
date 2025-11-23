@@ -85,7 +85,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
       }
     }
   };
-  
+
   return (
     <motion.div
       ref={cardRef}
@@ -205,7 +205,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
               transition={{ duration: 1.5, repeat: Infinity }}
             >
               <FaArrowRight size={14} />
-            </motion.span>
+          </motion.span>
           </span>
         </Link>
       </div>
@@ -427,7 +427,7 @@ const Projects = () => {
           }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
-        <motion.div 
+        <motion.div
           className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-purple-100/20 dark:bg-purple-900/10 rounded-full filter blur-3xl"
           style={{ y: y2, rotate: rotate2 }}
           animate={{
@@ -447,7 +447,7 @@ const Projects = () => {
         
         {/* Code particles */}
         <div className="absolute top-1/4 left-10">
-          <motion.div 
+          <motion.div
             className="text-blue-300/20 dark:text-blue-500/10 text-4xl"
             animate={{ 
               y: [0, -50, 0],
@@ -460,7 +460,7 @@ const Projects = () => {
           </motion.div>
         </div>
         <div className="absolute bottom-1/4 right-10">
-          <motion.div 
+          <motion.div
             className="text-purple-300/20 dark:text-purple-500/10 text-5xl"
             animate={{ 
               y: [0, -30, 0],
@@ -470,7 +470,7 @@ const Projects = () => {
             transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 5 }}
           >
             <FaLightbulb />
-          </motion.div>
+        </motion.div>
         </div>
       </div>
 

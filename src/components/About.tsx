@@ -278,7 +278,7 @@ const About = () => {
                       />
                     );
                   })}
-                </div>
+              </div>
               </motion.div>
               
               {/* Enhanced floating tech icons */}
@@ -459,7 +459,7 @@ const About = () => {
                       
                       {item.icon}
                     </div>
-                    <div>
+                  <div>
                       <h4 className="font-bold text-gray-800 dark:text-gray-200 text-lg mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{item.title}</h4>
                       <p className="text-gray-600 dark:text-gray-400">{item.description}</p>
                     </div>

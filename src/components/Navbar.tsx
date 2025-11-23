@@ -149,7 +149,7 @@ const Navbar = () => {
 
       {/* Desktop Navigation */}
       <div className="hidden md:block py-4">
-        <div className="container mx-auto px-6 md:px-10 flex justify-between items-center">
+      <div className="container mx-auto px-6 md:px-10 flex justify-between items-center">
           {/* Logo - Empty space for cleaner look */}
           <div className="w-12"></div>
 

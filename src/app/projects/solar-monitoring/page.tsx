@@ -219,9 +219,8 @@ const SolarMonitoringPage = () => {
       "Implemented machine learning models for predictive maintenance",
     ],
     imagePath: "/images/projects/solar.png",
-    heroBackgroundType: "gradient",
     heroOverlayOpacity: 0.2,
-    animationIntensity: "medium",
+    animationIntensity: "medium" as const,
     heroTextGradient: true,
     heroCtaText: "View Solar Monitoring System",
     heroTechnicalText: "Technical Implementation",
@@ -260,7 +259,7 @@ const SolarMonitoringPage = () => {
     ],
   };
 
-  return <ProjectPage {...projectData} />;
+  return <ProjectPage {...projectData} heroBackgroundType="gradient" />;
 };
 
 export default SolarMonitoringPage; 

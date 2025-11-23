@@ -62,7 +62,7 @@ export default function Home() {
           ></div>
         </div>
         
-        <Navbar />
+      <Navbar />
         
         {/* Main content with improved transitions between sections */}
         <div className="relative z-10">
@@ -71,7 +71,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <Hero />
+      <Hero />
           </motion.div>
           
           <motion.div
@@ -80,7 +80,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true, margin: "-100px" }}
           >
-            <About />
+      <About />
           </motion.div>
           
           <motion.div
@@ -89,7 +89,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true, margin: "-100px" }}
           >
-            <Skills />
+      <Skills />
           </motion.div>
           
           <motion.div
@@ -98,7 +98,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true, margin: "-100px" }}
           >
-            <Projects />
+      <Projects />
           </motion.div>
           
           <motion.div
@@ -107,7 +107,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true, margin: "-100px" }}
           >
-            <Experience />
+      <Experience />
           </motion.div>
           
           <motion.div
@@ -116,10 +116,10 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true, margin: "-100px" }}
           >
-            <Contact />
+      <Contact />
           </motion.div>
           
-          <Footer />
+      <Footer />
         </div>
         
         {/* Floating action button */}
@@ -136,7 +136,7 @@ export default function Home() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
           </svg>
         </motion.button>
-      </main>
+    </main>
     </>
   );
 }

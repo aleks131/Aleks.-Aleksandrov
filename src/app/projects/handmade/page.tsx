@@ -221,9 +221,8 @@ const HandmadePage = () => {
       "Implemented analytics tracking system",
     ],
     imagePath: "/images/projects/handmade.png",
-    heroBackgroundType: "particles",
     heroOverlayOpacity: 0.15,
-    animationIntensity: "high",
+    animationIntensity: "high" as const,
     heroTextGradient: true,
     heroCtaText: "View Handmade Platform",
     heroTechnicalText: "Technical Implementation",
@@ -283,7 +282,7 @@ const HandmadePage = () => {
     ],
   };
 
-  return <ProjectPage {...projectData} />;
+  return <ProjectPage {...projectData} heroBackgroundType="particles" />;
 };
 
 export default HandmadePage; 
