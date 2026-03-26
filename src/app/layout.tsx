@@ -5,7 +5,7 @@ import Script from "next/script";
 
 // Properly configure metadata for SEO and appearance
 export const metadata: Metadata = {
-  title: "Aleks Aleksandrov | Global Business Engineering Portfolio",
+  title: "Aleks Aleksandrov | Solution & Automation Engineer",
   description: "Portfolio showcasing skills in data analysis, software development, and project management with a focus on actionable insights and business process improvement",
   keywords: ["data analysis", "project management", "software development", "global business engineering"],
   authors: [{ name: "Aleks Aleksandrov" }],
@@ -30,7 +30,7 @@ function PerformanceInitializer() {
   if (typeof window !== 'undefined') {
     initPerformanceOptimizations();
   }
-  
+
   return null;
 }
 
@@ -45,9 +45,10 @@ export default function RootLayout({
         {/* Preconnect to important domains to speed up loading */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
+
         {/* Add base styling for smoother loading experience */}
-        <style dangerouslySetInnerHTML={{ __html: `
+        <style dangerouslySetInnerHTML={{
+          __html: `
           /* Prevent layout shifts during font loading */
           html.fonts-loading body {
             opacity: 0.8;
@@ -63,9 +64,10 @@ export default function RootLayout({
             opacity: 0;
           }
         `}} />
-        
+
         {/* Add lightweight inline script for early user experience optimization */}
-        <script dangerouslySetInnerHTML={{ __html: `
+        <script dangerouslySetInnerHTML={{
+          __html: `
           // Add loading class to enable CSS optimizations
           document.documentElement.classList.add('js-loading');
           
@@ -84,10 +86,10 @@ export default function RootLayout({
       <body className="transition-colors duration-300" suppressHydrationWarning>
         {/* Client-side performance initializer */}
         <PerformanceInitializer />
-        
+
         {/* Main content */}
         <main suppressHydrationWarning>{children}</main>
-        
+
         {/* Performance monitoring script - loads after main content */}
         <Script
           id="performance-monitoring"

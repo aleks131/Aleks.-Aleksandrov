@@ -3,9 +3,9 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { 
-  FaBriefcase, 
-  FaGraduationCap, 
+import {
+  FaBriefcase,
+  FaGraduationCap,
   FaBuilding,
   FaAward,
   FaMapMarkerAlt,
@@ -34,6 +34,7 @@ interface ExperienceItem {
   skills?: string[]; // Added field for skills
   achievements?: string[]; // Added field for key achievements
   gradient?: string; // Added field for custom gradient
+  badgeText?: string;
 }
 
 const Experience = () => {
@@ -41,7 +42,7 @@ const Experience = () => {
     threshold: 0.1,
     triggerOnce: false,
   });
-  
+
   // Parallax effect for background elements
   const { scrollYProgress } = useScroll();
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
@@ -49,25 +50,25 @@ const Experience = () => {
   const y3 = useTransform(scrollYProgress, [0, 1], [0, -200]);
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 10]);
   const rotateReverse = useTransform(scrollYProgress, [0, 1], [0, -10]);
-  
+
   // Enhanced experience items with skills and achievements
   const experiences: ExperienceItem[] = [
     {
       id: 1,
-      title: "Student Assistant, Commercial Analytics Team",
+      title: "Student Assistant – Commercial Analytics",
       company: "Salling Group",
       location: "Denmark",
-      duration: "July 2025 - Present",
+      duration: "07/2025 – 01/2026",
       description: [
-        "Gaining solid experience with data scientist tools and methodologies",
-        "Getting familiar with Docker and containerization technologies",
-        "Supporting commercial analytics initiatives and data-driven decision making",
-        "Working with advanced analytics platforms and tools"
+        "Designed and deployed a computer vision + OCR automation pipeline processing 3,000+ product labels per batch",
+        "Structured a modular batch workflow (detection → OCR → preprocessing → structured output) enabling scalability",
+        "Developed Python-based automation tools and job pipelines in Azure ML Studio",
+        "Contributed to KPI dashboard development in Power BI and collaborated with stakeholders"
       ],
-      skills: ["Data Science Tools", "Docker", "Commercial Analytics", "Data Analysis"],
+      skills: ["Python", "YOLO", "Tesseract OCR", "EasyOCR", "Azure ML Studio", "Power BI", "Batch Processing", "Computer Vision"],
       achievements: [
-        "Developing expertise in modern data science workflows",
-        "Learning containerization and deployment practices"
+        "Reduced extraction time from approximately 2 weeks to 3-4 days per batch",
+        "Implemented automated job validation mapping business requirements to technical execution"
       ],
       type: "work",
       icon: <FaBriefcase className="text-blue-500 dark:text-blue-400" />,
@@ -75,21 +76,21 @@ const Experience = () => {
     },
     {
       id: 2,
-      title: "Bachelor's in Global Business Engineering",
+      title: "Bachelor of Global Business Engineering — Software Technology Specialization",
       company: "VIA University College",
       location: "Denmark",
-      duration: "Aug 2021 - Jan 2026",
+      duration: "Aug 2021 – Jan 2026",
       description: [
-        "Focusing on Software Engineering, Data Analytics, and Business Strategy",
-        "Delivering data-focused projects using various tools and techniques",
-        "Developing technical and analytical skills for solving complex business challenges"
+        "Relevant Coursework: Software Engineering, Database Systems, Data Analytics Infrastructure, SAP ABAP Programming",
+        "Relevant Coursework: Web Development, Systems Digitalization (Industry 4.0), Product & Project Management, Innovation & Entrepreneurship"
       ],
-      skills: ["Data Analysis", "Software Engineering", "Business Strategy", "Project Management"],
+      skills: ["Software Engineering", "Database Systems", "SAP ABAP", "Industry 4.0", "Data Analytics"],
       achievements: [
-        "Delivering data-focused projects using Python, SQL, and BI tools",
-        "Developing technical skills through practical applications"
+        "Bachelor Project: Smart Gallery System — Automated Presentation Device",
+        "Completed degree program successfully with a focus on Software Technology"
       ],
       type: "education",
+      badgeText: "Education — Completed",
       icon: <FaGraduationCap className="text-purple-500 dark:text-purple-400" />,
       gradient: "from-purple-600 to-indigo-600"
     },
@@ -98,16 +99,16 @@ const Experience = () => {
       title: "Intern, Trade Planning and Pricing",
       company: "Salling Group",
       location: "Denmark",
-      duration: "Feb 2025 - Jun 2025",
+      duration: "02/2025 – 06/2025",
       description: [
-        "Spearheading a system migration project, enhancing reporting processes and accuracy",
-        "Automating workflows, streamlining operations and improving efficiency",
-        "Developing a reporting system to enable strategic decision-making"
+        "Contributed to migration of legacy reporting scripts to SAP DataSphere, ensuring data integrity",
+        "Automated reporting processes using SAP DataSphere, SQL, and R",
+        "Supported testing and validation of migrated workflows under the new system structure"
       ],
-      skills: ["Data Analysis", "Process Automation", "Strategic Planning", "System Migration"],
+      skills: ["SAP DataSphere", "SQL", "R", "Process Automation", "System Migration", "Data Integrity Validation"],
       achievements: [
-        "Enhanced reporting processes through system migration",
-        "Improved operational efficiency through workflow automation"
+        "Reduced manual effort and improved analytical reliability through automated workflows",
+        "Ensured data consistency throughout enterprise system transition"
       ],
       type: "work",
       icon: <FaBriefcase className="text-blue-500 dark:text-blue-400" />,
@@ -115,19 +116,19 @@ const Experience = () => {
     },
     {
       id: 4,
-      title: "Production Assistant (Part-Time)",
+      title: "Production Assistant & Internal Systems Development",
       company: "Salling Group Warehouse",
       location: "Denmark",
-      duration: "Nov 2021 - March 2025",
+      duration: "03/2022 – 02/2025",
       description: [
-        "Supporting inventory management using data tools, ensuring operational precision",
-        "Excelling in a fast-paced environment with strong organizational skills",
-        "Managing warehouse operations and supporting logistics processes"
+        "Designed and deployed three internal full-stack web applications (Next.js + Node.js) replacing paper-based workflows",
+        "Led operational shifts of 10+ team members in a high-volume warehouse environment",
+        "Identified process inefficiencies and implemented structured technical improvements"
       ],
-      skills: ["Inventory Management", "Data Tools", "Logistics", "Organizational Skills"],
+      skills: ["Next.js", "Node.js", "JavaScript", "Full-Stack Development", "Process Automation", "Leadership"],
       achievements: [
-        "Maintained operational precision through effective inventory management",
-        "Developed strong organizational skills in a fast-paced environment"
+        "Eliminated approximately 100 printed pages per week. All three applications remain in active use over one year later",
+        "Bridged hands-on operations with systematic digital solutions"
       ],
       type: "work",
       icon: <FaBriefcase className="text-blue-600 dark:text-blue-400" />,
@@ -169,7 +170,7 @@ const Experience = () => {
       gradient: "from-amber-500 to-yellow-600"
     }
   ];
-  
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -180,7 +181,7 @@ const Experience = () => {
       },
     },
   };
-  
+
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -192,7 +193,7 @@ const Experience = () => {
       },
     },
   };
-  
+
   // Map of skill to icon
   const skillIconMap: Record<string, React.ReactNode> = {
     "SQL": <FaDatabase className="text-blue-500" />,
@@ -207,13 +208,13 @@ const Experience = () => {
     "Project Management": <FaClock className="text-purple-500" />,
     "Analytics": <FaChartBar className="text-green-600" />,
   };
-  
+
   return (
     <section id="experience" className="py-24 relative overflow-hidden">
       {/* Enhanced animated background elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         {/* Moving gradient blobs */}
-        <motion.div 
+        <motion.div
           className="absolute top-0 left-0 w-[600px] h-[600px] bg-blue-500/5 dark:bg-blue-700/10 rounded-full filter blur-[100px]"
           style={{ y: y1, x: -50 }}
           animate={{
@@ -225,7 +226,7 @@ const Experience = () => {
             ease: "easeInOut"
           }}
         />
-        <motion.div 
+        <motion.div
           className="absolute bottom-40 right-20 w-[500px] h-[500px] bg-purple-500/5 dark:bg-purple-700/10 rounded-full filter blur-[100px]"
           style={{ y: y2, x: 50 }}
           animate={{
@@ -238,7 +239,7 @@ const Experience = () => {
             delay: 1
           }}
         />
-        <motion.div 
+        <motion.div
           className="absolute top-1/2 left-1/3 w-[400px] h-[400px] bg-green-500/5 dark:bg-green-700/10 rounded-full filter blur-[100px]"
           style={{ y: y3 }}
           animate={{
@@ -251,9 +252,9 @@ const Experience = () => {
             delay: 2
           }}
         />
-        
+
         {/* Decorative elements */}
-        <motion.div 
+        <motion.div
           className="absolute top-40 right-10 w-80 h-80 border border-gray-200 dark:border-gray-700 rounded-full opacity-20"
           style={{ rotate }}
         />
@@ -261,7 +262,7 @@ const Experience = () => {
           className="absolute bottom-40 left-10 w-40 h-40 border border-gray-200 dark:border-gray-700 rounded-full opacity-10"
           style={{ rotate: rotateReverse }}
         />
-        
+
         {/* Subtle grid pattern with parallax */}
         <div className="absolute inset-0 opacity-5"
           style={{
@@ -271,14 +272,14 @@ const Experience = () => {
           }}
         />
       </div>
-      
+
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         {/* Replace custom heading with SectionTitle component */}
-        <SectionTitle 
+        <SectionTitle
           title="Experience & Education"
           subtitle="My educational journey and professional experiences that have shaped my skills and knowledge."
         />
-        
+
         {/* Enhanced Timeline with better animations */}
         <motion.div
           ref={ref}
@@ -288,19 +289,19 @@ const Experience = () => {
           className="relative max-w-5xl mx-auto"
         >
           {/* Enhanced timeline line with animations */}
-          <motion.div 
+          <motion.div
             className="absolute left-8 md:left-1/2 h-full w-1 bg-gradient-to-b from-blue-500 via-purple-500 to-blue-500 rounded-full transform -translate-x-1/2"
             initial={{ height: 0, opacity: 0 }}
             whileInView={{ height: '100%', opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ 
+            transition={{
               height: { duration: 1.5, ease: "easeOut" },
               opacity: { duration: 0.3 }
             }}
           >
-            <motion.div 
+            <motion.div
               className="absolute top-0 left-0 right-0 bottom-0 bg-white/50 dark:bg-white/20 filter blur-sm"
-              animate={{ 
+              animate={{
                 opacity: [0, 0.5, 0],
                 y: [0, 1000, 0]
               }}
@@ -311,25 +312,24 @@ const Experience = () => {
               }}
             />
           </motion.div>
-          
+
           {/* Timeline items with enhanced animations */}
           {experiences.map((item, index) => (
             <motion.div
               key={item.id}
               variants={itemVariants}
-              className={`relative flex flex-col md:flex-row gap-8 mb-20 ${
-                index % 2 === 0 ? "md:flex-row-reverse" : ""
-              }`}
+              className={`relative flex flex-col md:flex-row gap-8 mb-20 ${index % 2 === 0 ? "md:flex-row-reverse" : ""
+                }`}
             >
               {/* Timeline dot with pulse animation */}
-              <motion.div 
+              <motion.div
                 className="absolute left-8 md:left-1/2 w-16 h-16 bg-white dark:bg-gray-800 border-4 border-blue-600 dark:border-blue-500 rounded-full transform -translate-x-1/2 flex items-center justify-center z-10 shadow-lg"
-                whileHover={{ 
+                whileHover={{
                   scale: 1.2,
                   boxShadow: "0 0 30px rgba(59, 130, 246, 0.5)",
                   rotate: [0, -10, 10, 0]
                 }}
-                transition={{ 
+                transition={{
                   scale: { duration: 0.3 },
                   boxShadow: { duration: 0.3 },
                   rotate: { duration: 0.5, ease: "easeInOut" }
@@ -350,23 +350,22 @@ const Experience = () => {
                   }}
                 />
                 <motion.div
-                  whileHover={{ 
+                  whileHover={{
                     scale: 1.3,
                     rotate: 360
                   }}
                   transition={{ duration: 0.5 }}
                 >
-                {item.icon}
+                  {item.icon}
                 </motion.div>
               </motion.div>
-              
+
               {/* Enhanced Content Card */}
-              <motion.div 
-                className={`ml-20 md:ml-0 md:w-[calc(50%-3rem)] relative group ${
-                  (item.title.includes("Student Assistant") || item.title.includes("Intern")) ? "scale-[1.02] z-20 border-2 border-blue-500/30 shadow-xl" : ""
-                }`}
-                whileHover={{ 
-                  y: -12, 
+              <motion.div
+                className={`ml-20 md:ml-0 md:w-[calc(50%-3rem)] relative group ${(item.title.includes("Student Assistant") || item.title.includes("Intern")) ? "scale-[1.02] z-20 border-2 border-blue-500/30 shadow-xl" : ""
+                  }`}
+                whileHover={{
+                  y: -12,
                   boxShadow: "0 25px 50px -12px rgba(0,0,0,0.15)",
                   transition: { duration: 0.3, ease: "easeOut" }
                 }}
@@ -377,7 +376,7 @@ const Experience = () => {
                   initial={{ opacity: 0 }}
                   whileHover={{ opacity: 0.7 }}
                 />
-                
+
                 {/* Card with gradient header */}
                 <div className={`relative rounded-xl overflow-hidden shadow-lg bg-white dark:bg-gray-900 transition-all duration-300 border border-gray-100 dark:border-gray-700 h-full`}>
                   {/* Gradient Header */}
@@ -396,11 +395,11 @@ const Experience = () => {
                         repeatDelay: 5
                       }}
                     />
-                    
+
                     {/* Icon in header with hover effects */}
-                    <motion.div 
+                    <motion.div
                       className="p-3 bg-white/20 backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center mb-3 shadow-inner relative overflow-hidden group-hover:shadow-lg"
-                      whileHover={{ 
+                      whileHover={{
                         rotate: [0, -10, 10, 0],
                         scale: 1.1,
                       }}
@@ -418,21 +417,21 @@ const Experience = () => {
                           repeatDelay: 2
                         }}
                       />
-                    {item.icon}
+                      {item.icon}
                     </motion.div>
-                    
+
                     <h3 className="text-xl font-bold mb-1 group-hover:translate-x-1 transition-transform duration-300">{item.title}</h3>
-                
+
                     <div className="flex flex-col space-y-1">
                       <div className="flex items-center gap-2 text-white/90">
                         <FaBuilding className="text-white/80" />
-                    <span>{item.company}</span>
-                  </div>
-                      
+                        <span>{item.company}</span>
+                      </div>
+
                       <div className="flex items-center justify-between text-sm text-white/80">
                         <div className="flex items-center gap-1">
                           <FaMapMarkerAlt />
-                    <span>{item.location}</span>
+                          <span>{item.location}</span>
                         </div>
                         <div className="flex items-center gap-1 bg-white/20 px-2 py-1 rounded-full backdrop-blur-sm group-hover:bg-white/30 transition-colors duration-300">
                           <FaCalendarAlt />
@@ -441,11 +440,11 @@ const Experience = () => {
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Card Content with animations */}
                   <div className="p-5">
                     {/* Description */}
-                    <motion.div 
+                    <motion.div
                       className="mb-4"
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
@@ -458,8 +457,8 @@ const Experience = () => {
                       </h4>
                       <ul className="space-y-2 text-gray-600 dark:text-gray-400">
                         {item.description.map((desc, i) => (
-                          <motion.li 
-                            key={i} 
+                          <motion.li
+                            key={i}
                             className="flex items-start gap-2"
                             initial={{ opacity: 0, x: -5 }}
                             whileInView={{ opacity: 1, x: 0 }}
@@ -476,10 +475,10 @@ const Experience = () => {
                         ))}
                       </ul>
                     </motion.div>
-                    
+
                     {/* Skills with animations */}
                     {item.skills && item.skills.length > 0 && (
-                      <motion.div 
+                      <motion.div
                         className="mb-4"
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
@@ -492,18 +491,18 @@ const Experience = () => {
                         </h4>
                         <div className="flex flex-wrap gap-2">
                           {item.skills.map((skill, i) => (
-                            <motion.div 
-                              key={i} 
+                            <motion.div
+                              key={i}
                               className="flex items-center gap-1 px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-xs"
                               initial={{ opacity: 0, scale: 0.8 }}
                               whileInView={{ opacity: 1, scale: 1 }}
                               viewport={{ once: true }}
                               transition={{ duration: 0.3, delay: 0.1 * i }}
-                              whileHover={{ 
-                                scale: 1.1, 
+                              whileHover={{
+                                scale: 1.1,
                                 backgroundColor: "rgba(99, 102, 241, 0.1)",
                                 color: "#4F46E5",
-                                transition: { duration: 0.2 } 
+                                transition: { duration: 0.2 }
                               }}
                             >
                               <span className="text-lg">
@@ -512,10 +511,10 @@ const Experience = () => {
                               <span className="font-medium text-gray-700 dark:text-gray-300">{skill}</span>
                             </motion.div>
                           ))}
-                </div>
+                        </div>
                       </motion.div>
                     )}
-                    
+
                     {/* Achievements with animations */}
                     {item.achievements && item.achievements.length > 0 && (
                       <motion.div
@@ -530,15 +529,15 @@ const Experience = () => {
                         </h4>
                         <ul className="space-y-2">
                           {item.achievements.map((achievement, i) => (
-                            <motion.li 
-                              key={i} 
+                            <motion.li
+                              key={i}
                               className="flex items-start gap-2 text-gray-600 dark:text-gray-400"
                               initial={{ opacity: 0, x: -5 }}
                               whileInView={{ opacity: 1, x: 0 }}
                               viewport={{ once: true }}
                               transition={{ duration: 0.3, delay: 0.15 * i }}
                             >
-                              <motion.span 
+                              <motion.span
                                 className="mt-1 text-green-500"
                                 whileHover={{ rotate: 360 }}
                                 transition={{ duration: 0.5 }}
@@ -547,31 +546,30 @@ const Experience = () => {
                               </motion.span>
                               <span className="group-hover:translate-x-1 transition-transform duration-300">{achievement}</span>
                             </motion.li>
-                  ))}
-                </ul>
+                          ))}
+                        </ul>
                       </motion.div>
                     )}
-                    
+
                     {/* Experience Type Badge with animations */}
-                    <motion.div 
+                    <motion.div
                       className="mt-4"
                       initial={{ opacity: 0, y: 5 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.3, delay: 0.5 }}
                     >
-                      <motion.span 
-                        className={`inline-block py-1 px-3 rounded-full text-xs font-medium ${
-                  item.type === "work" 
-                    ? "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300" 
-                    : item.type === "education"
-                    ? "bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300"
-                    : "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300"
-                        }`}
+                      <motion.span
+                        className={`inline-block py-1 px-3 rounded-full text-xs font-medium ${item.type === "work"
+                            ? "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+                            : item.type === "education"
+                              ? "bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300"
+                              : "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300"
+                          }`}
                         whileHover={{ scale: 1.1, y: -2 }}
                         transition={{ duration: 0.2 }}
                       >
-                  {item.type === "work" ? "Experience" : item.type === "education" ? "Education" : "Award"}
+                        {item.badgeText || (item.type === "work" ? "Experience" : item.type === "education" ? "Education" : "Award")}
                       </motion.span>
                     </motion.div>
                   </div>

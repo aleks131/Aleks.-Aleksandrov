@@ -281,7 +281,25 @@ const Navbar = () => {
           >
             <span className="absolute -inset-x-full -inset-y-24 bg-gradient-to-r from-transparent via-gray-400/20 to-transparent transform -rotate-45 transition-all duration-700 group-hover:translate-x-full"></span>
             <FaFileAlt size={20} className="group-hover:scale-110 transition-transform duration-300" /> 
-            <span className="relative z-10">Recommendation</span>
+            <span className="relative z-10">Rec. Letter 1</span>
+          </motion.a>
+          <motion.a
+            href="/images/about/Aleksreclet2.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-2 px-6 py-3.5 bg-gradient-to-r from-gray-200 to-gray-100 dark:from-gray-700 dark:to-gray-800 text-base font-medium text-gray-800 dark:text-gray-200 rounded-full shadow-md hover:shadow-gray-500/20 dark:hover:shadow-gray-700/20 hover:shadow-xl transition-all relative overflow-hidden"
+            whileHover={{ 
+              scale: 1.05, 
+              boxShadow: "0 15px 30px -5px rgba(107, 114, 128, 0.3)" 
+            }}
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.8, duration: 0.4 }}
+          >
+            <span className="absolute -inset-x-full -inset-y-24 bg-gradient-to-r from-transparent via-gray-400/20 to-transparent transform -rotate-45 transition-all duration-700 group-hover:translate-x-full"></span>
+            <FaFileAlt size={20} className="group-hover:scale-110 transition-transform duration-300" /> 
+            <span className="relative z-10">Rec. Letter 2</span>
           </motion.a>
         </div>
 

@@ -18,6 +18,7 @@ import {
   FaCode,
   FaProjectDiagram,
   FaCertificate,
+  FaFileAlt,
   FaLaptopCode,
   FaStar,
   FaHeart,
@@ -337,7 +338,7 @@ export default function AboutPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
-                <span className="text-blue-400">Data Engineer</span> & <span className="text-purple-400">Data Scientist</span>
+                <span className="text-blue-400">Solution & Automation Engineer</span>
               </motion.h2>
               
               <motion.p
@@ -346,17 +347,23 @@ export default function AboutPage() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                Global Business Engineering Student @ VIA University College | Commercial Analytics @ Salling Group
+                BSc Global Business Engineering · Software Technology Specialization · Graduated Jan 2026
               </motion.p>
 
                   <motion.div
-                    className="flex items-center justify-center lg:justify-start gap-2 text-gray-400"
+                    className="flex flex-wrap items-center justify-center lg:justify-start gap-4 text-gray-400"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.7 }}
                   >
-                    <FaMapMarkerAlt className="text-blue-400" />
-                    <span>Aarhus, Denmark</span>
+                    <div className="flex items-center gap-2">
+                      <FaMapMarkerAlt className="text-blue-400" />
+                      <span>Aarhus, Denmark</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-purple-400 font-semibold">Languages:</span>
+                      <span>English (Fluent), Bulgarian (Native), German (Basic)</span>
+                    </div>
                   </motion.div>
 
                   <motion.p
@@ -365,9 +372,7 @@ export default function AboutPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.6 }}
                   >
-                    As a <span className="text-blue-400 font-semibold">Data Engineer</span> and <span className="text-purple-400 font-semibold">Data Scientist</span>, I'm driven by innovation in transforming complex datasets into strategic business intelligence.
-                    My passion lies in building robust <span className="text-white font-semibold">ETL pipelines</span>, designing scalable <span className="text-white font-semibold">Data Warehousing</span> solutions, and architecting <span className="text-white font-semibold">Cloud-based data platforms</span>.
-                    Currently working with cutting-edge data science tools, Docker containerization, and modern data engineering practices to create impactful, production-ready solutions.
+                    I am a Solution & Automation Engineer with a strong foundation in business strategy and data architecture. I specialize in designing scalable systems—from Python-based computer vision pipelines to full enterprise data migrations. My core focus is translating complex business challenges into reliable technical solutions that save time, reduce manual effort, and drive scalable impact.
                   </motion.p>
                 </div>
 
@@ -381,7 +386,7 @@ export default function AboutPage() {
                   {[
                     { icon: FaRocket, number: "15+", label: "Projects", color: "from-blue-400 to-cyan-400", bgColor: "from-blue-500/10 to-cyan-500/10" },
                     { icon: FaCode, number: "20+", label: "Technologies", color: "from-purple-400 to-pink-400", bgColor: "from-purple-500/10 to-pink-500/10" },
-                    { icon: FaDatabase, number: "∞", label: "Data Passion", color: "from-green-400 to-emerald-400", bgColor: "from-green-500/10 to-emerald-500/10" },
+                    { icon: FaDatabase, number: "4", label: "Years Experience", color: "from-green-400 to-emerald-400", bgColor: "from-green-500/10 to-emerald-500/10" },
                     { icon: FaLightbulb, number: "∞", label: "Innovation", color: "from-orange-400 to-red-400", bgColor: "from-orange-500/10 to-red-500/10" }
                   ].map((stat, index) => (
                     <motion.div
@@ -447,7 +452,9 @@ export default function AboutPage() {
                   {[
                     { href: "mailto:aleksaleksandrov670@gmail.com", icon: FaEnvelope, label: "Get In Touch", color: "from-blue-500 to-blue-600" },
                     { href: "https://www.linkedin.com/in/aleks-aleksandrov-42a472238/", icon: FaLinkedin, label: "LinkedIn", color: "from-blue-600 to-blue-700" },
-                    { href: "/images/about/Aleks-Aleksandrov-CV.pdf", icon: FaGraduationCap, label: "Resume", color: "from-purple-500 to-purple-600" }
+                    { href: "/images/about/Aleks-Aleksandrov-CV.pdf", icon: FaGraduationCap, label: "Resume", color: "from-purple-500 to-purple-600" },
+                    { href: "/images/about/Aleksreclet.pdf", icon: FaFileAlt, label: "Rec Letter 1", color: "from-gray-500 to-gray-600" },
+                    { href: "/images/about/Aleksreclet2.pdf", icon: FaFileAlt, label: "Rec Letter 2", color: "from-gray-600 to-gray-700" }
                   ].map((button, index) => (
                     <motion.a
                       key={index}
@@ -555,6 +562,14 @@ export default function AboutPage() {
                   image: "/images/about/Aleks1.JPG",
                   icon: FaGlobe,
                   color: "from-purple-400 to-pink-500"
+                },
+                {
+                  title: "From warehouse floor to system builder",
+                  subtitle: "Bridging operations and technology",
+                  description: "Progressing from leading operational shifts in the warehouse to designing and deploying three internal full-stack applications that replaced paper workflows. Building solutions that solve real business problems.",
+                  image: "/images/projects/data.png",
+                  icon: FaProjectDiagram,
+                  color: "from-orange-400 to-red-500"
                 }
               ].map((story, index) => (
                 <motion.div
@@ -678,8 +693,7 @@ export default function AboutPage() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                   >
-                    "Innovation drives me forward, data engineering is my passion, and every solution I build 
-                    is designed to create meaningful impact through scalable, production-ready architectures."
+                    "I am motivated by building structured technical solutions that create measurable impact — with a long-term aim to move into solution architecture roles where scalable system design supports business performance."
                   </motion.blockquote>
 
                   <motion.div

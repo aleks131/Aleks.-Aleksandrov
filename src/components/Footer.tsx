@@ -7,7 +7,7 @@ import { FaHeart, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 const Footer = () => {
   // Use static year to avoid hydration mismatch
-  const currentYear = 2025;
+  const currentYear = 2026;
   
   // Links for the footer
   const links = [

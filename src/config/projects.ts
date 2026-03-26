@@ -5,12 +5,24 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    name: "Carbon Footprint Tracker",
-    path: "/projects/carbon-tracker",
+    name: "Computer Vision & OCR Automation Pipeline",
+    path: "/projects/ocr-pipeline",
   },
   {
-    name: "Smart Gallery & Screen",
+    name: "Internal Full-Stack Warehouse Applications",
+    path: "/projects/warehouse-apps",
+  },
+  {
+    name: "Smart Gallery System (Bachelor Project)",
     path: "/projects/smart-gallery",
+  },
+  {
+    name: "SAP DataSphere Reporting Migration",
+    path: "/projects/sap-migration",
+  },
+  {
+    name: "Carbon Footprint Tracker",
+    path: "/projects/carbon-tracker",
   },
   {
     name: "Data Visualization Dashboard",

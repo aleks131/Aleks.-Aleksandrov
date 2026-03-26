@@ -8,14 +8,14 @@ import { SparklesCore } from "@/components/ui/sparkles";
 const Hero = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
     // Enhanced parallax effect on mouse move
     if (parallaxRef.current) {
       const handleMouseMove = (e: MouseEvent) => {
         const x = e.clientX / window.innerWidth;
         const y = e.clientY / window.innerHeight;
-        
+
         gsap.to(parallaxRef.current, {
           duration: 1.2,
           x: (x - 0.5) * 40,
@@ -23,15 +23,15 @@ const Hero = () => {
           ease: "power2.out",
         });
       };
-      
+
       window.addEventListener("mousemove", handleMouseMove);
-      
+
       return () => {
         window.removeEventListener("mousemove", handleMouseMove);
       };
     }
   }, []);
-  
+
   // Enhanced text animation variants
   const textVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -45,7 +45,7 @@ const Hero = () => {
       },
     }),
   };
-  
+
   // Floating animation for background elements
   const floatingAnimation = {
     y: [0, -15, 0],
@@ -56,15 +56,15 @@ const Hero = () => {
       ease: "easeInOut",
     }
   };
-  
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0">
       {/* Enhanced Background with Sparkles */}
-      <div 
+      <div
         className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-indigo-950"
         suppressHydrationWarning
       >
-        <div 
+        <div
           className="w-full absolute inset-0 h-full"
           suppressHydrationWarning
         >
@@ -80,20 +80,20 @@ const Hero = () => {
           />
         </div>
       </div>
-      
+
       {/* Enhanced animated background shapes */}
-      <div 
-        ref={parallaxRef} 
+      <div
+        ref={parallaxRef}
         className="absolute inset-0 overflow-hidden pointer-events-none"
         suppressHydrationWarning
       >
         {/* Glowing orbs with different sizes, positions and animations */}
-        <motion.div 
+        <motion.div
           animate={floatingAnimation}
           className="absolute top-[15%] left-[20%] w-64 h-64 rounded-full bg-blue-500/10 dark:bg-blue-600/15 blur-2xl"
           suppressHydrationWarning
         />
-        <motion.div 
+        <motion.div
           animate={{
             y: [0, 20, 0],
             transition: {
@@ -105,9 +105,9 @@ const Hero = () => {
             }
           }}
           className="absolute bottom-[25%] right-[15%] w-80 h-80 rounded-full bg-purple-500/10 dark:bg-purple-600/15 blur-3xl"
-          suppressHydrationWarning 
+          suppressHydrationWarning
         />
-        <motion.div 
+        <motion.div
           animate={{
             y: [0, -20, 0],
             x: [0, 15, 0],
@@ -122,7 +122,7 @@ const Hero = () => {
           className="absolute top-[55%] left-[55%] w-48 h-48 rounded-full bg-green-500/10 dark:bg-green-600/15 blur-xl"
           suppressHydrationWarning
         />
-        <motion.div 
+        <motion.div
           animate={{
             scale: [1, 1.1, 1],
             transition: {
@@ -136,10 +136,10 @@ const Hero = () => {
           suppressHydrationWarning
         />
       </div>
-      
+
       {/* Content with enhanced animations */}
-      <div 
-        className="container mx-auto px-6 md:px-12 relative z-10 text-center" 
+      <div
+        className="container mx-auto px-6 md:px-12 relative z-10 text-center"
         ref={textRef}
         suppressHydrationWarning
       >
@@ -166,16 +166,16 @@ const Hero = () => {
               >
                 <div className="w-96 h-40 bg-blue-500/20 rounded-full blur-3xl"></div>
               </motion.div>
-            
+
               {/* Name */}
-              <motion.h1 
+              <motion.h1
                 custom={1}
                 variants={textVariants}
                 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 relative z-10"
               >
                 Aleks Aleksandrov
               </motion.h1>
-              
+
               {/* Tagline with enhanced styling */}
               <motion.div
                 custom={1.5}
@@ -194,35 +194,35 @@ const Hero = () => {
                   }}
                 />
                 <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto px-6 py-2 relative">
-                  <span className="text-blue-400">Innovation</span> through <span className="text-purple-400">data engineering</span>: 
+                  <span className="text-blue-400">Engineering solutions</span> that drive <span className="text-purple-400">business impact</span>:
                   <br className="hidden md:block" />
-                  <span className="italic">building pipelines today, enabling insights tomorrow, scaling solutions always.</span>
+                  <span className="italic">bridging technical architecture with strategic automation to scale real-world results.</span>
                 </p>
               </motion.div>
-              
+
               {/* Professional fields with enhanced styling */}
-              <motion.div 
+              <motion.div
                 custom={2}
                 variants={textVariants}
                 className="flex flex-col md:flex-row justify-center items-center gap-5 md:gap-12"
               >
-                <motion.span 
+                <motion.span
                   whileHover={{ scale: 1.05, backgroundColor: "rgba(59, 130, 246, 0.3)" }}
                   className="text-xl md:text-2xl font-medium text-gray-200 px-8 py-3 bg-gray-800/40 backdrop-blur-sm rounded-full border border-blue-500/30 shadow-lg shadow-blue-500/10 transition-all duration-300"
                 >
-                  Data Engineer
+                  Solution & Automation Engineer
                 </motion.span>
-                <motion.span 
+                <motion.span
                   whileHover={{ scale: 1.05, backgroundColor: "rgba(16, 185, 129, 0.3)" }}
                   className="text-xl md:text-2xl font-medium text-gray-200 px-8 py-3 bg-gray-800/40 backdrop-blur-sm rounded-full border border-green-500/30 shadow-lg shadow-green-500/10 transition-all duration-300"
                 >
-                  Data Scientist
+                  Business Engineer
                 </motion.span>
-                <motion.span 
+                <motion.span
                   whileHover={{ scale: 1.05, backgroundColor: "rgba(168, 85, 247, 0.3)" }}
                   className="text-xl md:text-2xl font-medium text-gray-200 px-8 py-3 bg-gray-800/40 backdrop-blur-sm rounded-full border border-purple-500/30 shadow-lg shadow-purple-500/10 transition-all duration-300"
                 >
-                  Full-Stack Developer
+                  Data Analytics
                 </motion.span>
               </motion.div>
             </div>

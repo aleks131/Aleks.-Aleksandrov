@@ -3,14 +3,14 @@
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { 
-  FaPython, FaReact, FaDatabase, FaAws, 
+import {
+  FaPython, FaReact, FaDatabase, FaAws,
   FaDocker, FaGitAlt, FaMicrosoft, FaNodeJs,
   FaChartBar, FaJava, FaHtml5, FaCss3Alt, FaJs,
   FaCode, FaTable, FaFileExcel, FaChartPie,
-  FaBrain, FaLightbulb
+    FaBrain, FaLightbulb, FaRobot, FaCogs, FaUsers, FaSitemap
 } from "react-icons/fa";
-import { SiTableau, SiDotnet } from "react-icons/si";
+import { SiTableau, SiDotnet, SiKubernetes } from "react-icons/si";
 import SectionTitle from "./shared/SectionTitle";
 
 // Skill card type
@@ -28,21 +28,21 @@ const SkillCard = React.memo(({ skill, index }: { skill: SkillCardType, index: n
       className={`flex flex-col items-center justify-center p-6 rounded-xl shadow-sm bg-white/5 dark:bg-[#1E1E1E] 
         border border-gray-200 dark:border-gray-700 relative group/skill overflow-hidden hover:shadow-lg transition-all duration-300 hover:border-blue-500 dark:hover:border-blue-500`}
       initial={{ opacity: 0, y: 20 }}
-      whileInView={{ 
-        opacity: 1, 
-        y: 0, 
-        transition: { 
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        transition: {
           delay: 0.03 * index,
           duration: 0.4,
         }
       }}
       viewport={{ once: true, margin: "-50px" }}
-      whileHover={{ 
-        y: -5, 
+      whileHover={{
+        y: -5,
         transition: { duration: 0.2 }
       }}
     >
-      
+
       <div className="mb-4 relative">
         {skill.icon}
       </div>
@@ -57,19 +57,19 @@ SkillCard.displayName = "SkillCard";
 // Memoized skill pill component for better performance
 const SkillPill = React.memo(({ skill, index }: { skill: { name: string, color: string }, index: number }) => {
   return (
-    <motion.div 
+    <motion.div
       key={skill.name}
       initial={{ opacity: 0, y: 10 }}
-      whileInView={{ 
-        opacity: 1, 
-        y: 0, 
-        transition: { 
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        transition: {
           delay: 0.03 * index,
           duration: 0.4,
         }
       }}
       viewport={{ once: true }}
-      whileHover={{ 
+      whileHover={{
         y: -5,
         transition: { duration: 0.2 }
       }}
@@ -89,13 +89,13 @@ const Skills = () => {
     threshold: 0.1,
     triggerOnce: true,
   });
-  
+
   // Enhanced parallax effect for background elements
   const { scrollYProgress } = useScroll();
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -50]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -75]);
   const y3 = useTransform(scrollYProgress, [0, 1], [0, -40]);
-  
+
   // Skills by category with softer colors for better contrast - Enhanced with Data Science skills
   const dataAnalysisSkills = useMemo(() => [
     { name: "Python", color: "bg-blue-400 text-blue-50" },
@@ -103,7 +103,8 @@ const Skills = () => {
     { name: "Power BI", color: "bg-amber-400 text-amber-50" },
     { name: "Excel", color: "bg-emerald-400 text-emerald-50" },
     { name: "R", color: "bg-sky-400 text-sky-50" },
-    { name: "Datasphere", color: "bg-violet-400 text-violet-50" },
+    { name: "SAP DataSphere", color: "bg-violet-400 text-violet-50" },
+    { name: "SAP ABAP", color: "bg-purple-500 text-purple-50" },
     { name: "Tableau", color: "bg-blue-300 text-blue-800" },
     { name: "Data Gathering", color: "bg-rose-400 text-rose-50" },
     { name: "Pandas", color: "bg-blue-500 text-blue-50" },
@@ -118,7 +119,15 @@ const Skills = () => {
     { name: "Data Cleaning", color: "bg-red-400 text-red-50" },
     { name: "ETL Processes", color: "bg-amber-500 text-amber-50" }
   ], []);
-  
+
+  const aiAutomationSkills = useMemo(() => [
+    { name: "YOLO", color: "bg-red-500 text-red-50" },
+    { name: "Tesseract OCR", color: "bg-orange-500 text-orange-50" },
+    { name: "EasyOCR", color: "bg-amber-500 text-amber-50" },
+    { name: "Batch Processing", color: "bg-green-500 text-green-50" },
+    { name: "Computer Vision Pipelines", color: "bg-blue-500 text-blue-50" },
+  ], []);
+
   const programmingSkills = useMemo(() => [
     { name: "Java", color: "bg-orange-400 text-orange-50" },
     { name: "C#", color: "bg-indigo-400 text-indigo-50" },
@@ -128,30 +137,35 @@ const Skills = () => {
     { name: "React", color: "bg-sky-400 text-sky-50" },
     { name: "Node.js", color: "bg-emerald-400 text-emerald-50" }
   ], []);
-  
+
   const projectManagementSkills = useMemo(() => [
-    { 
-      name: "Agile Methodology", 
-      color: "bg-gradient-to-br from-blue-500/80 to-blue-600/80 text-white", 
-      icon: <FaGitAlt className="text-white" size={20} /> 
+    {
+      name: "Agile Project Work",
+      color: "bg-gradient-to-br from-blue-500/80 to-blue-600/80 text-white",
+      icon: <FaGitAlt className="text-white" size={20} />
     },
-    { 
-      name: "Leadership", 
-      color: "bg-gradient-to-br from-violet-500/80 to-violet-600/80 text-white", 
-      icon: <FaChartBar className="text-white" size={20} /> 
+    {
+      name: "Cross-Functional Communication",
+      color: "bg-gradient-to-br from-violet-500/80 to-violet-600/80 text-white",
+      icon: <FaUsers className="text-white" size={20} />
     },
-    { 
-      name: "Time Management", 
-      color: "bg-gradient-to-br from-emerald-500/80 to-emerald-600/80 text-white", 
-      icon: <FaTable className="text-white" size={20} /> 
+    {
+      name: "Modular System Design",
+      color: "bg-gradient-to-br from-emerald-500/80 to-emerald-600/80 text-white",
+      icon: <FaSitemap className="text-white" size={20} />
     },
-    { 
-      name: "Risk Assessment", 
-      color: "bg-gradient-to-br from-rose-500/80 to-rose-600/80 text-white", 
-      icon: <FaChartPie className="text-white" size={20} /> 
+    {
+      name: "Requirements Analysis",
+      color: "bg-gradient-to-br from-rose-500/80 to-rose-600/80 text-white",
+      icon: <FaChartPie className="text-white" size={20} />
+    },
+    {
+      name: "KPI Design",
+      color: "bg-gradient-to-br from-amber-500/80 to-amber-600/80 text-white",
+      icon: <FaChartBar className="text-white" size={20} />
     }
   ], []);
-  
+
   // Tools and technologies in card format with more subtle gradient backgrounds - Enhanced with Docker and Data Science tools
   const skillCards = useMemo(() => [
     { name: "Python", icon: <FaPython size={32} className="text-blue-500" />, category: "Programming", color: "bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/40" },
@@ -166,21 +180,23 @@ const Skills = () => {
     { name: "Power BI", icon: <FaChartPie size={32} className="text-amber-500" />, category: "Data & Analytics", color: "bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-900/40 dark:to-amber-800/40" },
     { name: "Excel", icon: <FaFileExcel size={32} className="text-emerald-500" />, category: "Data & Analytics", color: "bg-gradient-to-br from-emerald-100 to-emerald-200 dark:from-emerald-900/40 dark:to-emerald-800/40" },
     { name: "Tableau", icon: <SiTableau size={32} className="text-blue-500" />, category: "Data & Analytics", color: "bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/40" },
-    { name: "Datasphere", icon: <FaChartBar size={32} className="text-violet-500" />, category: "Data & Analytics", color: "bg-gradient-to-br from-violet-100 to-violet-200 dark:from-violet-900/40 dark:to-violet-800/40" },
+    { name: "SAP DataSphere", icon: <FaChartBar size={32} className="text-violet-500" />, category: "Data & Analytics", color: "bg-gradient-to-br from-violet-100 to-violet-200 dark:from-violet-900/40 dark:to-violet-800/40" },
+    { name: "SAP ABAP", icon: <FaDatabase size={32} className="text-purple-500" />, category: "Systems & Enterprise Technologies", color: "bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-900/40 dark:to-purple-800/40" },
     { name: "Docker", icon: <FaDocker size={32} className="text-cyan-500" />, category: "DevOps & Containers", color: "bg-gradient-to-br from-cyan-100 to-cyan-200 dark:from-cyan-900/40 dark:to-cyan-800/40" },
+    { name: "Kubernetes", icon: <SiKubernetes size={32} className="text-blue-500" />, category: "DevOps & Containers", color: "bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/40" },
     { name: "Azure ML", icon: <FaMicrosoft size={32} className="text-blue-500" />, category: "Cloud", color: "bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/40" },
     { name: "Agile", icon: <FaGitAlt size={32} className="text-orange-500" />, category: "Project Management", color: "bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900/40 dark:to-orange-800/40" },
     { name: "Azure", icon: <FaMicrosoft size={32} className="text-blue-500" />, category: "Cloud", color: "bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/40" },
     { name: "Pandas", icon: <FaBrain size={32} className="text-blue-600" />, category: "Data Science", color: "bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/40" },
     { name: "Scikit-learn", icon: <FaLightbulb size={32} className="text-orange-500" />, category: "Data Science", color: "bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900/40 dark:to-orange-800/40" },
   ], []);
-  
+
   return (
     <section id="skills" className="py-24 relative overflow-hidden">
       {/* Simplified animated background with fewer elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         {/* Main gradient blobs with reduced animation complexity */}
-        <motion.div 
+        <motion.div
           className="absolute top-0 left-0 w-[600px] h-[600px] bg-blue-300/10 dark:bg-blue-600/10 rounded-full filter blur-[100px]"
           style={{ y: y1, x: -50 }}
           animate={{
@@ -192,20 +208,20 @@ const Skills = () => {
             ease: "easeInOut"
           }}
         />
-          <motion.div
+        <motion.div
           className="absolute bottom-20 right-0 w-[550px] h-[550px] bg-violet-300/10 dark:bg-violet-600/10 rounded-full filter blur-[100px]"
           style={{ y: y2, x: 50 }}
-              animate={{ 
+          animate={{
             opacity: [0.1, 0.2, 0.1],
-              }}
-              transition={{
+          }}
+          transition={{
             duration: 7,
-                repeat: Infinity,
+            repeat: Infinity,
             ease: "easeInOut",
             delay: 1
-              }}
-            />
-        
+          }}
+        />
+
         {/* Enhanced grid pattern with parallax */}
         <div className="absolute inset-0 opacity-5"
           style={{
@@ -218,11 +234,11 @@ const Skills = () => {
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         {/* Replace custom heading with SectionTitle component */}
-        <SectionTitle 
+        <SectionTitle
           title="Technical Skills"
           subtitle="A comprehensive set of technical capabilities spanning data analysis, programming, web development, and cloud technologies that power my portfolio projects."
         />
-        
+
         {/* Skills sections with better spacing */}
         <div ref={ref} className="space-y-16">
           {/* Data Analysis Skills */}
@@ -239,11 +255,11 @@ const Skills = () => {
                   <FaChartPie className="text-blue-500 dark:text-blue-400" size={24} />
                 </div>
                 <h3 className="text-xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-violet-500">
-                Data Analysis
+                  Data Analysis
                 </h3>
                 <div className="h-1 w-16 bg-gradient-to-r from-blue-400 to-violet-400 mt-2 rounded-full"></div>
               </div>
-              
+
               <div className="flex flex-wrap justify-center gap-3">
                 {dataAnalysisSkills.map((skill, index) => (
                   <SkillPill key={skill.name} skill={skill} index={index} />
@@ -251,7 +267,34 @@ const Skills = () => {
               </div>
             </div>
           </motion.div>
-          
+
+          {/* AI & Automation Systems */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="relative"
+          >
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-md relative z-10 border border-gray-100 dark:border-gray-700">
+              <div className="flex flex-col items-center mb-8">
+                <div className="p-3 bg-red-100 dark:bg-red-900/30 rounded-full mb-4">
+                  <FaRobot className="text-red-500 dark:text-red-400" size={24} />
+                </div>
+                <h3 className="text-xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">
+                  AI & Automation Systems
+                </h3>
+                <div className="h-1 w-16 bg-gradient-to-r from-red-400 to-orange-400 mt-2 rounded-full"></div>
+              </div>
+
+              <div className="flex flex-wrap justify-center gap-3">
+                {aiAutomationSkills.map((skill, index) => (
+                  <SkillPill key={skill.name} skill={skill} index={index} />
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
           {/* Programming Skills */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -266,11 +309,11 @@ const Skills = () => {
                   <FaCode className="text-violet-500 dark:text-violet-400" size={24} />
                 </div>
                 <h3 className="text-xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-indigo-500">
-                Programming & Web Development
+                  Programming & Web Development
                 </h3>
                 <div className="h-1 w-16 bg-gradient-to-r from-violet-400 to-indigo-400 mt-2 rounded-full"></div>
               </div>
-              
+
               <div className="flex flex-wrap justify-center gap-3">
                 {programmingSkills.map((skill, index) => (
                   <SkillPill key={skill.name} skill={skill} index={index} />
@@ -278,7 +321,7 @@ const Skills = () => {
               </div>
             </div>
           </motion.div>
-        
+
           {/* Project Management Skills */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -293,14 +336,14 @@ const Skills = () => {
                   <FaLightbulb className="text-emerald-500 dark:text-emerald-400" size={24} />
                 </div>
                 <h3 className="text-xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-blue-500">
-                Project Management Skills
-              </h3>
+                  Methods & Collaboration
+                </h3>
                 <div className="h-1 w-16 bg-gradient-to-r from-emerald-400 to-blue-400 mt-2 rounded-full"></div>
               </div>
-              
+
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {projectManagementSkills.map((skill, index) => (
-                  <motion.div 
+                  <motion.div
                     key={skill.name}
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -318,7 +361,7 @@ const Skills = () => {
               </div>
             </div>
           </motion.div>
-          
+
           {/* Technologies and Tools with improved performance */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -333,11 +376,11 @@ const Skills = () => {
                   <FaBrain className="text-blue-500 dark:text-blue-400" size={24} />
                 </div>
                 <h3 className="text-xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-violet-500">
-                Technologies & Tools
-              </h3>
+                  Technologies & Tools
+                </h3>
                 <div className="h-1 w-16 bg-gradient-to-r from-blue-400 to-violet-400 mt-2 rounded-full"></div>
               </div>
-              
+
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {skillCards.map((skill, index) => (
                   <SkillCard key={skill.name} skill={skill} index={index} />

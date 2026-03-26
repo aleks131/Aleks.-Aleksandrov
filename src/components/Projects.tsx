@@ -6,8 +6,8 @@ import { useInView } from "react-intersection-observer";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { 
-  FaExternalLinkAlt, FaChartLine, FaUsers, FaClock, 
+import {
+  FaExternalLinkAlt, FaChartLine, FaUsers, FaClock,
   FaTrophy, FaCode, FaLaptopCode, FaPalette, FaLightbulb,
   FaArrowRight, FaGithub, FaEye
 } from "react-icons/fa";
@@ -19,11 +19,11 @@ const getImagePath = (path: string) => {
   if (!path || path.trim() === '') {
     return '/images/projects/placeholder.jpg';
   }
-  
+
   if (path.startsWith('http') || path.startsWith('data:')) {
     return path;
   }
-  
+
   return path;
 };
 
@@ -47,29 +47,29 @@ interface Project {
 
 const ProjectCard = ({ project }: { project: Project }) => {
   const router = useRouter();
-  
+
   // Create references for the card and tracking mouse position
   const cardRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  
+
   // Reduce animation complexity for better performance
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
-    
+
     const rect = cardRef.current.getBoundingClientRect();
     setMousePosition({
       x: e.clientX - rect.left,
       y: e.clientY - rect.top
     });
   }, []);
-  
+
   // More efficient card animations with better performance
   const cardVariants = {
-    hidden: { 
+    hidden: {
       opacity: 0,
       y: 30
     },
-    visible: { 
+    visible: {
       opacity: 1,
       y: 0,
       transition: {
@@ -106,7 +106,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
           "--y": `${mousePosition.y}px`
         } as React.CSSProperties}
       />
-    
+
       {/* Project image with enhanced contrast and clarity */}
       <div className="relative h-64 overflow-hidden">
         <Image
@@ -116,25 +116,24 @@ const ProjectCard = ({ project }: { project: Project }) => {
           height={400}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           quality={90}
-          priority={false}
-          loading="lazy"
+          priority={true}
           placeholder="blur"
           blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzQ1NmZmMjUiIC8+PC9zdmc+"
           className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700 brightness-110 contrast-110"
         />
-        
+
         {/* Improved overlay for better text contrast and readability */}
-        <div 
+        <div
           className="absolute inset-0 bg-gradient-to-br from-blue-700/85 to-indigo-900/85 mix-blend-multiply opacity-85 group-hover:opacity-75 transition-opacity duration-300"
           style={{
             boxShadow: 'inset 0 0 30px rgba(0,0,0,0.4)'
           }}
         />
-        
+
         {/* Project title with improved shadow for better readability */}
         <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
           <h3 className="text-2xl md:text-3xl font-bold text-white text-center mb-3 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">{project.title}</h3>
-          
+
           {/* Project stats with better contrast */}
           <div className="flex items-center gap-3 text-white">
             {project.stats && (
@@ -199,13 +198,13 @@ const ProjectCard = ({ project }: { project: Project }) => {
           className="mt-auto w-full py-2.5 px-4 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-lg font-medium flex items-center justify-center gap-2 hover:from-blue-700 hover:to-indigo-800 transition-all duration-300 shadow-sm hover:shadow-md group"
         >
           <span className="flex items-center gap-2">
-            View Project Details 
+            View Project Details
             <motion.span
               animate={{ x: [0, 5, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
             >
               <FaArrowRight size={14} />
-          </motion.span>
+            </motion.span>
           </span>
         </Link>
       </div>
@@ -220,7 +219,7 @@ const Projects = () => {
     threshold: 0.1,
     triggerOnce: true,
   });
-  
+
   // Parallax effects for background elements
   const { scrollYProgress } = useScroll();
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
@@ -232,6 +231,86 @@ const Projects = () => {
   const projects: Project[] = [
     {
       id: 1,
+      title: "Computer Vision & OCR Automation Pipeline",
+      description: "A Python pipeline using YOLO for object detection and Tesseract OCR for text extraction, processing 3,000+ product labels per batch. Deployed with automated job pipelines in Azure ML Studio.",
+      image: "/images/projects/ocr_pipeline.png",
+      tags: ["Python", "YOLO", "Tesseract OCR", "EasyOCR", "Azure ML Studio"],
+      path: "/projects/ocr-pipeline",
+      category: "data-analysis",
+      kpis: [
+        { value: "3-4 Days", label: "Extraction Time" },
+        { value: "3,000+", label: "Labels / Batch" },
+        { value: "Automated", label: "Workflow" },
+      ],
+      stats: {
+        completion: 100,
+        teamSize: "1",
+        duration: "Completed",
+        impact: "High",
+      },
+    },
+    {
+      id: 2,
+      title: "Internal Full-Stack Warehouse Applications",
+      description: "Three full-stack web applications built with Next.js and Node.js that replaced paper-based internal workflows in the warehouse. All three applications remain in active production use over one year after deployment.",
+      image: "/images/projects/sustain.png",
+      tags: ["Next.js", "Node.js", "JavaScript", "Process Automation"],
+      path: "/projects/warehouse-apps",
+      category: "web-development",
+      kpis: [
+        { value: "3 Apps", label: "Production Active" },
+        { value: "100 pages", label: "Saved per week" },
+        { value: "1+ Year", label: "In Active Use" },
+      ],
+      stats: {
+        completion: 100,
+        teamSize: "1",
+        duration: "Completed",
+        impact: "High",
+      },
+    },
+    {
+      id: 3,
+      title: "Smart Gallery System (Bachelor Project)",
+      description: "An automated presentation device developed as a Bachelor's final project. A Next.js-powered digital signage solution with real-time content synchronization from Google Drive and automated schedule updates through Excel integration.",
+      image: "/images/projects/gallery.png",
+      tags: ["Python", "Next.js", "Hardware Integration", "Cloud"],
+      path: "/projects/smart-gallery",
+      category: "web-development",
+      kpis: [
+        { value: "100%", label: "Automation" },
+        { value: "5 min", label: "Update Time" },
+        { value: "Zero", label: "Paper Waste" },
+      ],
+      stats: {
+        completion: 100,
+        teamSize: "1",
+        duration: "8 weeks",
+        impact: "High",
+      },
+    },
+    {
+      id: 4,
+      title: "SAP DataSphere Reporting Migration",
+      description: "Migration of legacy reporting scripts to SAP DataSphere with SQL and R automation, improving data integrity and reducing manual reporting effort.",
+      image: "/images/projects/sap_migration.png",
+      tags: ["SAP DataSphere", "SQL", "R", "System Migration"],
+      path: "/projects/sap-migration",
+      category: "data-analysis",
+      kpis: [
+        { value: "Automated", label: "Reporting" },
+        { value: "100%", label: "Data Integrity" },
+        { value: "High", label: "Reliability" },
+      ],
+      stats: {
+        completion: 100,
+        teamSize: "1",
+        duration: "4 Months",
+        impact: "High",
+      },
+    },
+    {
+      id: 5,
       title: "Carbon Footprint Tracker",
       description: "A comprehensive .NET-based carbon tracking system developed for Siemens Gamesa, enabling real-time monitoring and reduction of carbon emissions across manufacturing operations.",
       image: "/images/projects/carbon.png",
@@ -251,27 +330,7 @@ const Projects = () => {
       },
     },
     {
-      id: 2,
-      title: "Smart Gallery & Screen",
-      description: "A Next.js-powered digital signage solution with real-time content synchronization from Google Drive and automated schedule updates through Excel integration.",
-      image: "/images/projects/gallery.png",
-      tags: ["Next.js", "TypeScript", "Google Drive API", "VBA", "Cloud"],
-      path: "/projects/smart-gallery",
-      category: "web-development",
-      kpis: [
-        { value: "100%", label: "Automation" },
-        { value: "5 min", label: "Update Time" },
-        { value: "Zero", label: "Paper Waste" },
-      ],
-      stats: {
-        completion: 100,
-        teamSize: "1",
-        duration: "8 weeks",
-        impact: "Medium",
-      },
-    },
-    {
-      id: 3,
+      id: 6,
       title: "SustainovationHub",
       description: "An e-commerce platform connecting eco-conscious consumers with sustainable products. Features include seller verification, impact tracking, and community engagement.",
       image: "/images/projects/sustain.png",
@@ -291,7 +350,7 @@ const Projects = () => {
       },
     },
     {
-      id: 4,
+      id: 7,
       title: "Solar Panel Monitoring System",
       description: "A comprehensive monitoring system for tracking solar panel performance and energy generation at Ejby Maskinfabrik, featuring advanced analytics and reporting capabilities.",
       image: "/images/projects/solar.png",
@@ -311,7 +370,7 @@ const Projects = () => {
       },
     },
     {
-      id: 5,
+      id: 8,
       title: "WasteWise – Smart Trash Can",
       description: "A user-centered design project for an intelligent waste management system featuring smart sorting and compacting capabilities, improving waste disposal efficiency.",
       image: "/images/projects/Trash.png",
@@ -331,7 +390,7 @@ const Projects = () => {
       },
     },
     {
-      id: 6,
+      id: 9,
       title: "International Market Selection Software",
       description: "A data-driven software solution for Guldmann A/S to analyze and select optimal international markets for expansion, utilizing comprehensive market analysis.",
       image: "/images/projects/ims.png",
@@ -351,7 +410,7 @@ const Projects = () => {
       },
     },
     {
-      id: 7,
+      id: 10,
       title: "Handmade",
       description: "An e-commerce platform designed for artisans to showcase and sell their handcrafted products with customizable storefronts, enhancing the online presence of small businesses.",
       image: "/images/projects/handmade.png",
@@ -371,7 +430,7 @@ const Projects = () => {
       },
     },
     {
-      id: 8,
+      id: 11,
       title: "Data Visualization Dashboard",
       description: "A comprehensive business intelligence dashboard providing real-time insights into key performance indicators, helping organizations make data-driven decisions.",
       image: "/images/projects/data.png",
@@ -418,7 +477,7 @@ const Projects = () => {
     <section id="projects" className="py-28 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <motion.div 
+        <motion.div
           className="absolute top-20 left-0 w-[500px] h-[500px] bg-blue-100/30 dark:bg-blue-900/10 rounded-full filter blur-3xl"
           style={{ y: y1, rotate: rotate1 }}
           animate={{
@@ -436,7 +495,7 @@ const Projects = () => {
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
-        
+
         {/* Subtle grid background */}
         <div className="absolute inset-0 opacity-5"
           style={{
@@ -444,15 +503,15 @@ const Projects = () => {
             backgroundSize: '40px 40px',
           }}
         />
-        
+
         {/* Code particles */}
         <div className="absolute top-1/4 left-10">
           <motion.div
             className="text-blue-300/20 dark:text-blue-500/10 text-4xl"
-            animate={{ 
+            animate={{
               y: [0, -50, 0],
               rotate: [0, 10, 0],
-              opacity: [0.2, 0.4, 0.2] 
+              opacity: [0.2, 0.4, 0.2]
             }}
             transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
           >
@@ -462,21 +521,21 @@ const Projects = () => {
         <div className="absolute bottom-1/4 right-10">
           <motion.div
             className="text-purple-300/20 dark:text-purple-500/10 text-5xl"
-            animate={{ 
+            animate={{
               y: [0, -30, 0],
               rotate: [0, -10, 0],
-              opacity: [0.2, 0.3, 0.2] 
+              opacity: [0.2, 0.3, 0.2]
             }}
             transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 5 }}
           >
             <FaLightbulb />
-        </motion.div>
+          </motion.div>
         </div>
       </div>
 
       <div className="container mx-auto px-6 md:px-12">
         {/* Replace custom heading with SectionTitle component */}
-        <SectionTitle 
+        <SectionTitle
           title="Featured Projects"
           subtitle="A showcase of my creative and technical projects spanning data analysis, web development, and innovative design solutions."
         />
@@ -487,11 +546,10 @@ const Projects = () => {
             <motion.button
               key={button.value}
               onClick={() => handleFilterChange(button.value)}
-              className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2 ${
-                activeFilter === button.value
+              className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2 ${activeFilter === button.value
                   ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/25"
                   : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700"
-              }`}
+                }`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * index, duration: 0.5 }}
