@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import ProjectPage from "@/components/ProjectPage";
 import { motion } from "framer-motion";
 import { LoadingSpinner, ChartContainer } from "@/components/shared";
@@ -16,6 +16,12 @@ import {
 const Bar = lazy(() => import('react-chartjs-2').then(mod => ({ default: mod.Bar })));
 
 const SapMigrationPage = () => {
+  useEffect(() => {
+    import('chart.js').then(({ Chart, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend }) => {
+      Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+    });
+  }, []);
+
   const metrics = [
     { value: "100%", label: "Data Integrity Maintained", icon: <FaCheckCircle className="text-green-500" size={20} /> },
     { value: "4 Mo.", label: "Migration Duration", icon: <FaCogs className="text-blue-500" size={20} /> },
@@ -23,7 +29,7 @@ const SapMigrationPage = () => {
   ];
 
   const beforeAfterData = {
-    labels: ['Manual Steps', 'Report Generation Time (hrs)', 'Data Errors/Month', 'Scripts Maintained'],
+    labels: ['Manual Steps', 'Report Time (hrs)', 'Data Errors', 'Scripts Maintained'],
     datasets: [
       {
         label: 'Before Migration',
@@ -89,40 +95,23 @@ const SapMigrationPage = () => {
   ];
 
   const features = [
-    {
-      title: "Legacy Script Analysis",
-      description: "Audited and catalogued over 30 legacy SQL reporting scripts to ensure complete coverage during migration.",
-      icon: <FaDatabase className="text-blue-500" size={24} />,
-    },
-    {
-      title: "R Automation Pipeline",
-      description: "Developed R scripts to automate data transformation and loading processes into SAP DataSphere.",
-      icon: <FaCogs className="text-purple-500" size={24} />,
-    },
-    {
-      title: "Data Integrity Validation",
-      description: "Implemented a systematic validation protocol ensuring 100% data integrity throughout the migration process.",
-      icon: <FaCheckCircle className="text-green-500" size={24} />,
-    },
-    {
-      title: "Live Reporting in SAP",
-      description: "Delivered production-ready live dashboards and models within SAP DataSphere replacing all manual reporting workflows.",
-      icon: <FaChartBar className="text-amber-500" size={24} />,
-    },
+    { title: "Legacy Analysis", description: "Audited 30+ legacy scripts for full coverage.", icon: <FaDatabase className="text-blue-500" size={24} /> },
+    { title: "R Automation", description: "Automated transformations into SAP DataSphere.", icon: <FaCogs className="text-purple-500" size={24} /> },
+    { title: "Data Integrity", description: "Guaranteed 100% accuracy during migration.", icon: <FaCheckCircle className="text-green-500" size={24} /> },
+    { title: "Live Reporting", description: "Deployed real-time dashboards in SAP.", icon: <FaChartBar className="text-amber-500" size={24} /> },
   ];
 
   const technicalDetails = [
-    "Audited 30+ legacy SQL and R reporting scripts across multiple business domains.",
-    "Designed a staged migration plan to minimize business disruption.",
-    "Implemented automated data ingestion pipelines into SAP DataSphere using R and SQL.",
-    "Validated all migrated data against source systems to guarantee 100% accuracy.",
-    "Delivered live analytical views and dashboards directly accessible within SAP.",
+    "Audited 30+ legacy SQL and R reporting scripts across multiple domains.",
+    "Integrated automated data transformation pipelines using R.",
+    "Validated all migrated data against source systems for 100% accuracy.",
+    "Delivered live analytical views and dashboards within SAP DataSphere.",
   ];
 
   return (
     <ProjectPage
       title="SAP DataSphere Reporting Migration"
-      overview="Led the end-to-end migration of 30+ legacy reporting scripts into SAP DataSphere, using SQL and R automation to eliminate manual processes and establish a scalable, reliable data reporting infrastructure."
+      overview="Led the end-to-end migration of 30+ legacy reporting scripts into SAP DataSphere, using SQL and R automation to eliminate manual processes and establish a scalable data reporting infrastructure."
       teamSize="1"
       duration="4 Months"
       role="Data & Automation Engineer"
@@ -134,7 +123,6 @@ const SapMigrationPage = () => {
       heroBackgroundType="waves"
       heroOverlayOpacity={0.2}
       animationIntensity="medium"
-      secondaryImagePath="/images/projects/sap_migration.png"
       heroTextGradient={true}
       heroCtaText="View Migration Details"
       heroTechnicalText="Technical Architecture"
