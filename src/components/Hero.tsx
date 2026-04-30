@@ -12,21 +12,26 @@ const Hero = () => {
   useEffect(() => {
     // Enhanced parallax effect on mouse move
     if (parallaxRef.current) {
+      let rafId: number;
       const handleMouseMove = (e: MouseEvent) => {
-        const x = e.clientX / window.innerWidth;
-        const y = e.clientY / window.innerHeight;
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(() => {
+          const x = e.clientX / window.innerWidth;
+          const y = e.clientY / window.innerHeight;
 
-        gsap.to(parallaxRef.current, {
-          duration: 1.2,
-          x: (x - 0.5) * 40,
-          y: (y - 0.5) * 40,
-          ease: "power2.out",
+          gsap.to(parallaxRef.current, {
+            duration: 1.2,
+            x: (x - 0.5) * 40,
+            y: (y - 0.5) * 40,
+            ease: "power2.out",
+          });
         });
       };
 
       window.addEventListener("mousemove", handleMouseMove);
 
       return () => {
+        if (rafId) cancelAnimationFrame(rafId);
         window.removeEventListener("mousemove", handleMouseMove);
       };
     }
@@ -73,7 +78,7 @@ const Hero = () => {
             background="transparent"
             minSize={0.6}
             maxSize={1.6}
-            particleDensity={90}
+            particleDensity={50}
             className="w-full h-full"
             particleColor="#FFFFFF"
             speed={0.4}
@@ -194,9 +199,10 @@ const Hero = () => {
                   }}
                 />
                 <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto px-6 py-2 relative">
-                  <span className="text-blue-400">Engineering solutions</span> that drive <span className="text-purple-400">business impact</span>:
+                  Designing and deploying <span className="text-blue-400">automation systems</span> that turn
                   <br className="hidden md:block" />
-                  <span className="italic">bridging technical architecture with strategic automation to scale real-world results.</span>
+                  <span className="text-purple-400">weeks of manual work into days</span> —
+                  <span className="italic"> from computer vision pipelines to full-stack production applications.</span>
                 </p>
               </motion.div>
 
@@ -210,19 +216,19 @@ const Hero = () => {
                   whileHover={{ scale: 1.05, backgroundColor: "rgba(59, 130, 246, 0.3)" }}
                   className="text-xl md:text-2xl font-medium text-gray-200 px-8 py-3 bg-gray-800/40 backdrop-blur-sm rounded-full border border-blue-500/30 shadow-lg shadow-blue-500/10 transition-all duration-300"
                 >
-                  Solution & Automation Engineer
+                  Analytics & Automation Engineer
                 </motion.span>
                 <motion.span
                   whileHover={{ scale: 1.05, backgroundColor: "rgba(16, 185, 129, 0.3)" }}
                   className="text-xl md:text-2xl font-medium text-gray-200 px-8 py-3 bg-gray-800/40 backdrop-blur-sm rounded-full border border-green-500/30 shadow-lg shadow-green-500/10 transition-all duration-300"
                 >
-                  Business Engineer
+                  Automation Engineer
                 </motion.span>
                 <motion.span
                   whileHover={{ scale: 1.05, backgroundColor: "rgba(168, 85, 247, 0.3)" }}
                   className="text-xl md:text-2xl font-medium text-gray-200 px-8 py-3 bg-gray-800/40 backdrop-blur-sm rounded-full border border-purple-500/30 shadow-lg shadow-purple-500/10 transition-all duration-300"
                 >
-                  Data Analytics
+                  AI Analyst
                 </motion.span>
               </motion.div>
             </div>

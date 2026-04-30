@@ -75,7 +75,7 @@ const About = () => {
 
   const statItems = [
     { value: "15+", label: "Projects Completed", color: "from-blue-400 to-blue-600" },
-    { value: "4", label: "Years Experience", color: "from-purple-400 to-purple-600" },
+    { value: "100%", label: "Motivation & Passion", color: "from-purple-400 to-purple-600" },
     { value: "20+", label: "Technologies", color: "from-green-400 to-green-600" },
     { value: "∞", label: "Innovation", color: "from-amber-400 to-amber-600" }
   ];
@@ -147,7 +147,7 @@ const About = () => {
         {/* Replace custom heading with SectionTitle component */}
         <SectionTitle
           title="About Me"
-          subtitle="Passionate about innovation, data engineering, and transforming complex datasets into strategic business intelligence. Visit my full bio to learn about my journey, experiences, and personal interests."
+          subtitle="Analytics & Automation Engineer with hands-on production experience in Python, SQL, and applied AI-driven workflow systems. Visit my full bio to learn about my journey, experiences, and personal interests."
         />
 
         {/* Main content */}
@@ -240,7 +240,7 @@ const About = () => {
 
                   {/* Actual profile image */}
                   <Image
-                    src="/images/about/Aleks-portfolio.jpg"
+                    src="/images/about/Aleks-about.png"
                     alt="Aleks Aleksandrov"
                     fill
                     className="object-cover object-center relative z-10 transition-all duration-700"
@@ -390,7 +390,7 @@ const About = () => {
               className="text-3xl md:text-4xl font-bold mb-6 text-gray-800 dark:text-gray-200 relative"
             >
               <span className="inline-block bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600">
-                Solution & Business Engineer
+                Analytics & Automation Engineer
               </span>
             </motion.h3>
 
@@ -399,7 +399,7 @@ const About = () => {
               className="space-y-5"
             >
               <p className="text-gray-700 dark:text-gray-300 text-lg md:text-xl leading-relaxed">
-                I am a Solution & Automation Engineer with a strong foundation in business strategy and data architecture. I specialize in designing scalable systems—from Python-based computer vision pipelines to full enterprise data migrations. My core focus is translating complex business challenges into reliable technical solutions that save time, reduce manual effort, and drive scalable impact.
+                Analytics & Automation Engineer with hands-on production experience in Python, SQL, and applied AI-driven workflow systems. Designed and deployed computer vision and automation solutions that reduced manual processes from weeks to days — across both warehouse operations and commercial analytics environments. Experienced in translating business requirements into structured technical implementations, working closely with data scientists and stakeholders to deliver solutions that create measurable impact. Strong foundation in software engineering, data infrastructure, and enterprise technologies, with a consistent track record of taking projects from concept to production. Driven by the intersection of technical depth and business understanding — building systems that solve real problems reliably and at scale.
               </p>
             </motion.div>
 
@@ -411,32 +411,32 @@ const About = () => {
               {[
                 {
                   icon: <FaDatabase className="text-blue-600 dark:text-blue-400" size={24} />,
-                  title: "Data Engineering",
-                  description: "Building robust ETL pipelines and scalable data architectures",
+                  title: "Programming & Data Eng",
+                  description: "Building robust ETL pipelines and data architectures using Python and SQL",
                   color: "from-blue-500 to-blue-700"
                 },
                 {
                   icon: <FaChartLine className="text-purple-600 dark:text-purple-400" size={24} />,
-                  title: "Data Science",
-                  description: "Transforming complex datasets into strategic business intelligence",
+                  title: "AI & Automation Systems",
+                  description: "Deploying Computer Vision and OCR solutions to automate complex workflows",
                   color: "from-purple-500 to-purple-700"
                 },
                 {
                   icon: <FaCode className="text-green-600 dark:text-green-400" size={24} />,
-                  title: "Cloud Architecture",
-                  description: "Designing scalable cloud-based data platforms and solutions",
+                  title: "Web & App Development",
+                  description: "Building end-to-end applications with React, Next.js, and REST APIs",
                   color: "from-green-500 to-green-700"
                 },
                 {
                   icon: <FaLaptopCode className="text-amber-600 dark:text-amber-400" size={24} />,
-                  title: "Full-Stack Development",
-                  description: "Building end-to-end solutions with modern technologies",
+                  title: "Systems & Enterprise Tech",
+                  description: "Integrating solutions with SAP DataSphere, Power BI, and Azure ML Studio",
                   color: "from-amber-500 to-amber-700"
                 },
               ].map((item, i) => (
                 <motion.div
                   key={i}
-                  className="relative group overflow-hidden"
+                  className="relative group h-full"
                   whileHover={{ scale: 1.03, y: -5 }}
                   transition={{ duration: 0.2 }}
                 >
@@ -444,7 +444,7 @@ const About = () => {
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl opacity-30 group-hover:opacity-100 blur-sm transition-opacity duration-300"></div>
 
                   {/* Card content */}
-                  <div className="flex items-start gap-4 p-5 rounded-xl bg-white dark:bg-gray-800 shadow-md hover:shadow-xl border border-gray-100 dark:border-gray-700 transition-all duration-300 relative">
+                  <div className="flex h-full items-start gap-4 p-5 rounded-xl bg-white dark:bg-gray-800 shadow-md hover:shadow-xl border border-gray-100 dark:border-gray-700 transition-all duration-300 relative overflow-hidden">
                     <div className="mt-1 p-3 rounded-lg group-hover:scale-110 transition-transform duration-300 relative">
                       {/* Icon gradient background */}
                       <div className="absolute inset-0 bg-gradient-to-br from-white/80 to-gray-100/80 dark:from-gray-700/80 dark:to-gray-800/80 rounded-lg -z-10"></div>
@@ -515,6 +515,7 @@ const About = () => {
                     key={i}
                     href={link.href}
                     title={link.label}
+                    aria-label={link.label}
                     className={`p-3 rounded-full ${link.color} transform hover:scale-110 transition-all duration-300 relative group/icon`}
                     target={link.href.startsWith("http") || link.href.endsWith(".pdf") ? "_blank" : undefined}
                     rel={link.href.startsWith("http") || link.href.endsWith(".pdf") ? "noopener noreferrer" : undefined}

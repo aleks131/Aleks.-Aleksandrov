@@ -7,6 +7,7 @@ import { FaFilePdf, FaFileAlt, FaChevronDown, FaProjectDiagram, FaCode, FaHome, 
 import { projects } from "@/config/projects";
 import { usePathname } from 'next/navigation';
 import { CgWorkAlt } from "react-icons/cg";
+import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -96,6 +97,7 @@ const Navbar = () => {
               <Link
                 href={getHref(link.href)}
                 prefetch={true}
+                aria-label={`Mobile Navigation - ${link.name}`}
                 className={`flex flex-col items-center gap-1 px-3 py-2 rounded-lg text-xs font-medium transition-all whitespace-nowrap ${
                   pathname === link.href || (link.section && pathname === `/#${link.section}`)
                     ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md'
@@ -117,6 +119,7 @@ const Navbar = () => {
             <Link
               href={getHref('#projects')}
               prefetch={true}
+              aria-label="Mobile Navigation - Projects"
               className={`flex flex-col items-center gap-1 px-3 py-2 rounded-lg text-xs font-medium transition-all whitespace-nowrap ${
                 pathname?.includes('/projects')
                   ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md'
@@ -135,6 +138,7 @@ const Navbar = () => {
             href="/images/about/Aleks-Aleksandrov-CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Mobile Navigation - Resume"
             className="flex flex-col items-center gap-1 px-3 py-2 rounded-lg text-xs font-medium bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md whitespace-nowrap"
             whileTap={{ scale: 0.95 }}
             initial={{ opacity: 0, scale: 0.8 }}
@@ -144,6 +148,11 @@ const Navbar = () => {
             <FaFilePdf size={14} />
             <span>Resume</span>
           </motion.a>
+
+          {/* Mobile Theme Toggle */}
+          <div className="flex-shrink-0 scale-75">
+            <ThemeToggle />
+          </div>
         </div>
       </nav>
 
@@ -177,6 +186,7 @@ const Navbar = () => {
               <Link
                 href={getHref(link.href)}
                   prefetch={true}
+                  aria-label={`Desktop Navigation - ${link.name}`}
                   className="text-base font-medium px-7 py-3 rounded-full flex items-center gap-2.5 transition-all relative text-gray-700 dark:text-gray-200 hover:bg-white/30 dark:hover:bg-gray-700/30"
               >
                   <span className="text-lg relative z-10">{link.icon}</span>
@@ -203,6 +213,9 @@ const Navbar = () => {
           >
             <div 
                 className={`text-sm font-medium px-5 py-2.5 rounded-full hover:bg-white/80 dark:hover:bg-gray-700/80 flex items-center gap-2.5 cursor-pointer transition-all ${pathname?.includes('/projects') ? 'bg-white/90 dark:bg-gray-700/90 text-blue-600 dark:text-blue-400 font-semibold shadow-md' : 'text-gray-700 dark:text-gray-300'}`}
+                role="button"
+                aria-label="Desktop Navigation - Projects Menu"
+                aria-expanded={isProjectsOpen}
             >
                 <span className="text-lg transform group-hover:scale-110 transition-transform">
                   <FaProjectDiagram className="text-indigo-500" />
@@ -245,12 +258,13 @@ const Navbar = () => {
           </motion.div>
         </nav>
 
-        {/* Right Side - CV and Recommendation Buttons */}
-        <div className="hidden md:flex items-center gap-4">
+        {/* Right Side - Theme Toggle + CV and Recommendation Buttons */}
+        <div className="hidden md:flex items-center gap-3">
           <motion.a
             href="/images/about/Aleks-Aleksandrov-CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Desktop Navigation - Resume"
             className="group flex items-center gap-2 px-6 py-3.5 bg-gradient-to-r from-blue-600 via-purple-500 to-blue-700 text-white text-base font-medium rounded-full shadow-md hover:shadow-blue-500/20 hover:shadow-xl transition-all relative overflow-hidden"
             whileHover={{ 
               scale: 1.05, 
@@ -269,6 +283,7 @@ const Navbar = () => {
             href="/images/about/Aleksreclet.pdf"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Desktop Navigation - Recommendation Letter 1"
             className="group flex items-center gap-2 px-6 py-3.5 bg-gradient-to-r from-gray-200 to-gray-100 dark:from-gray-700 dark:to-gray-800 text-base font-medium text-gray-800 dark:text-gray-200 rounded-full shadow-md hover:shadow-gray-500/20 dark:hover:shadow-gray-700/20 hover:shadow-xl transition-all relative overflow-hidden"
             whileHover={{ 
               scale: 1.05, 
@@ -287,6 +302,7 @@ const Navbar = () => {
             href="/images/about/Aleksreclet2.pdf"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Desktop Navigation - Recommendation Letter 2"
             className="group flex items-center gap-2 px-6 py-3.5 bg-gradient-to-r from-gray-200 to-gray-100 dark:from-gray-700 dark:to-gray-800 text-base font-medium text-gray-800 dark:text-gray-200 rounded-full shadow-md hover:shadow-gray-500/20 dark:hover:shadow-gray-700/20 hover:shadow-xl transition-all relative overflow-hidden"
             whileHover={{ 
               scale: 1.05, 
@@ -301,6 +317,9 @@ const Navbar = () => {
             <FaFileAlt size={20} className="group-hover:scale-110 transition-transform duration-300" /> 
             <span className="relative z-10">Rec. Letter 2</span>
           </motion.a>
+
+          {/* Desktop Theme Toggle */}
+          <ThemeToggle />
         </div>
 
         </div>

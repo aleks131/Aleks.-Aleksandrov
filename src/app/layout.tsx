@@ -2,10 +2,11 @@ import "./globals.css";
 import { Metadata, Viewport } from "next";
 import { initPerformanceOptimizations } from "@/utils/performance";
 import Script from "next/script";
+import ThemeProvider from "@/components/ThemeProvider";
 
 // Properly configure metadata for SEO and appearance
 export const metadata: Metadata = {
-  title: "Aleks Aleksandrov | Solution & Automation Engineer",
+  title: "Aleks Aleksandrov | Analytics & Automation Engineer",
   description: "Portfolio showcasing skills in data analysis, software development, and project management with a focus on actionable insights and business process improvement",
   keywords: ["data analysis", "project management", "software development", "global business engineering"],
   authors: [{ name: "Aleks Aleksandrov" }],
@@ -40,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         {/* Preconnect to important domains to speed up loading */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -65,20 +66,18 @@ export default function RootLayout({
           }
         `}} />
 
-        {/* Add lightweight inline script for early user experience optimization */}
+        {/* Apply saved theme or default to dark — runs before paint to prevent flash */}
         <script dangerouslySetInnerHTML={{
           __html: `
-          // Add loading class to enable CSS optimizations
           document.documentElement.classList.add('js-loading');
-          
-          // Remove loading class when DOM is ready
           document.addEventListener('DOMContentLoaded', function() {
             document.documentElement.classList.remove('js-loading');
           });
-          
-          // Apply user's preferred color scheme immediately to prevent flash
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          if (prefersDark) {
+          // Theme: read from localStorage or default to dark
+          var saved = localStorage.getItem('portfolio-theme');
+          if (saved === 'light') {
+            document.documentElement.classList.remove('dark');
+          } else {
             document.documentElement.classList.add('dark');
           }
         `}} />
@@ -87,8 +86,10 @@ export default function RootLayout({
         {/* Client-side performance initializer */}
         <PerformanceInitializer />
 
-        {/* Main content */}
-        <main suppressHydrationWarning>{children}</main>
+        {/* Main content wrapped in ThemeProvider */}
+        <ThemeProvider>
+          <main suppressHydrationWarning>{children}</main>
+        </ThemeProvider>
 
         {/* Performance monitoring script - loads after main content */}
         <Script

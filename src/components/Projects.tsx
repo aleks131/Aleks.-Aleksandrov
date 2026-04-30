@@ -537,7 +537,7 @@ const Projects = () => {
         {/* Replace custom heading with SectionTitle component */}
         <SectionTitle
           title="Featured Projects"
-          subtitle="A showcase of my creative and technical projects spanning data analysis, web development, and innovative design solutions."
+          subtitle="Production systems and applied engineering projects — from automated OCR pipelines processing 3,000+ labels to full-stack warehouse apps running for over a year."
         />
 
         {/* Enhanced filter buttons */}
@@ -576,7 +576,7 @@ const Projects = () => {
             }
           }}
         >
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}

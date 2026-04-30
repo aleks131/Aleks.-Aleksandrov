@@ -52,7 +52,7 @@ const Footer = () => {
                 }}
               />
               <p className="relative z-10 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-4 rounded-lg border border-gray-100/50 dark:border-gray-700/50 text-gray-700 dark:text-gray-300 leading-relaxed shadow-sm">
-                Data Engineer & Data Scientist specializing in ETL pipelines, data warehousing, and cloud architecture. 
+                Analytics & Automation Engineer specializing in Python, Computer Vision, and AI-driven workflow systems.
                 Based in Aarhus, Denmark, passionate about innovation and building scalable data solutions.
             </p>
             </div>
@@ -85,6 +85,7 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={social.label}
                   className="flex items-center gap-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                   whileHover={{ x: 5 }}
                   whileTap={{ scale: 0.95 }}

@@ -338,7 +338,7 @@ export default function AboutPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
-                <span className="text-blue-400">Solution & Automation Engineer</span>
+                <span className="text-blue-400">Analytics & Automation Engineer</span>
               </motion.h2>
               
               <motion.p
@@ -372,7 +372,7 @@ export default function AboutPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.6 }}
                   >
-                    I am a Solution & Automation Engineer with a strong foundation in business strategy and data architecture. I specialize in designing scalable systems—from Python-based computer vision pipelines to full enterprise data migrations. My core focus is translating complex business challenges into reliable technical solutions that save time, reduce manual effort, and drive scalable impact.
+                    Analytics & Automation Engineer with hands-on production experience in Python, SQL, and applied AI-driven workflow systems. Designed and deployed computer vision and automation solutions that reduced manual processes from weeks to days — across both warehouse operations and commercial analytics environments. Driven by the intersection of technical depth and business understanding — building systems that solve real problems reliably and at scale.
                   </motion.p>
                 </div>
 
@@ -532,7 +532,7 @@ export default function AboutPage() {
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
                 From the mountains of Bulgaria to the innovative landscape of Denmark,
-                discover the experiences that shaped my passion for data engineering, innovation, and technology.
+                discover how a journey from warehouse operations to commercial analytics shaped my engineering approach.
               </motion.p>
             </motion.div>
 
@@ -693,7 +693,7 @@ export default function AboutPage() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                   >
-                    "I am motivated by building structured technical solutions that create measurable impact — with a long-term aim to move into solution architecture roles where scalable system design supports business performance."
+                    "I understand why a solution needs to exist before I build it, what it needs to do for the people depending on it, and how it needs to hold up over time. I am driven by technical work that creates measurable impact and aim toward roles where strong system design and real business outcomes go hand in hand."
                   </motion.blockquote>
 
                   <motion.div
@@ -736,8 +736,8 @@ export default function AboutPage() {
               </h2>
 
               <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
-                Ready to collaborate on innovative <span className="text-blue-400 font-semibold">data engineering</span> projects? 
-                I'm always excited to discuss how we can transform data into strategic insights and build scalable solutions together.
+                Ready to collaborate on <span className="text-blue-400 font-semibold">automation and analytics</span> projects? 
+                I'm always excited to discuss how we can build systems that turn manual processes into scalable, reliable solutions.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
